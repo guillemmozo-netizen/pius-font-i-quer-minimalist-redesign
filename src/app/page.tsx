@@ -397,7 +397,11 @@ function HistorySection() {
             variants={fadeUp}
             custom={2}
               className="text-gray-500 text-base max-w-2xl mx-auto"
-          </motion.p>
+            >
+              Des de 1974, el nostre institut ha evolucionat amb la societat,
+              mantenint sempre el comprom&iacute;s amb l&apos;educaci&oacute; de qualitat al
+              Bages.
+            </motion.p>
         </motion.div>
 
         {/* Timeline */}
