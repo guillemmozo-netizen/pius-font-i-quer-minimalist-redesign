@@ -872,12 +872,14 @@ function Facilities() {
           className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-16"
         >
           {galleryImages.map((img, i) => (
-            <motion.div
-              key={img.alt}
-              variants={scaleIn}
-              custom={i}
-              className="relative aspect-[4/3] rounded-2xl overflow-hidden group shadow-sm"
-            >
+              <motion.div
+                key={img.alt}
+                variants={rotateIn}
+                custom={i}
+                whileHover={{ scale: 1.05, rotate: 1 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="relative aspect-[4/3] rounded-2xl overflow-hidden group shadow-sm"
+              >
               <Image
                 src={img.src}
                 alt={img.alt}
