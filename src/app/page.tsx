@@ -562,7 +562,7 @@ function PiusBio() {
 
                 <div className="relative flex gap-6">
                   {/* Photo */}
-                  <div className="shrink-0 w-28 sm:w-36 rounded-2xl overflow-hidden shadow-md">
+                  <div className="shrink-0 w-40 sm:w-52 rounded-2xl overflow-hidden shadow-md">
                     <Image
                       src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/pfq2-1770414419410.jpg?width=8000&height=8000&resize=contain"
                       alt="Pius Font i Quer"
