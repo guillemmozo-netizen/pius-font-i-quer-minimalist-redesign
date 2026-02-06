@@ -263,7 +263,7 @@ function Hero({ onNavigate }: { onNavigate: (view: ViewType) => void }) {
 
       <motion.div
         style={{ opacity }}
-        className="relative z-10 max-w-4xl mx-auto px-6 text-center -mt-36"
+        className="relative z-10 max-w-4xl mx-auto px-6 text-center mt-16"
       >
           <motion.div
             initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
