@@ -60,6 +60,7 @@ const scaleIn = {
 
 /* ─── images ─── */
 const IMAGES = {
+  hero: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/pic_sid1487-0-norm-1770406064437.jpg?width=8000&height=8000&resize=contain",
   patio: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170217_141444-xs-1770405520006.jpg?width=8000&height=8000&resize=contain",
   pingpong: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170421_130826-xs-1770405519854.jpg?width=8000&height=8000&resize=contain",
   corridor1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170912_170647-xs-1770405519842.jpg?width=8000&height=8000&resize=contain",
@@ -84,11 +85,11 @@ function Navbar() {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/80 border-b border-gray-100"
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/70 border-b border-indigo-100/50"
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-blue-700 flex items-center justify-center">
+          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-700 to-purple-600 flex items-center justify-center">
             <span className="text-white font-bold text-sm">PFQ</span>
           </div>
           <span className="font-semibold text-gray-900 hidden sm:block">
@@ -102,7 +103,7 @@ function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
+              className="text-sm text-gray-500 hover:text-indigo-700 transition-colors"
             >
               {l.label}
             </a>
@@ -111,7 +112,7 @@ function Navbar() {
             href="https://www.iespfq.cat/portal/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium px-4 py-2 rounded-full bg-gray-900 text-white hover:bg-gray-700 transition-colors"
+            className="text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-blue-700 to-purple-600 text-white hover:opacity-90 transition-opacity"
           >
             Portal
           </a>
@@ -135,7 +136,7 @@ function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
+            className="lg:hidden overflow-hidden bg-white/95 backdrop-blur-xl border-t border-indigo-100/50"
           >
             <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-3">
               {links.map((l) => (
@@ -152,7 +153,7 @@ function Navbar() {
                 href="https://www.iespfq.cat/portal/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-medium px-4 py-2 rounded-full bg-gray-900 text-white text-center"
+                className="text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-blue-700 to-purple-600 text-white text-center"
               >
                 Portal
               </a>
@@ -181,26 +182,33 @@ function Hero() {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background image with overlay */}
+      {/* Background image */}
       <div className="absolute inset-0">
         <Image
-          src={IMAGES.patio}
-          alt="Pati de l'institut"
+          src={IMAGES.hero}
+          alt="Pius Font i Quer"
           fill
-          className="object-cover"
+          className="object-cover object-top"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-white/95" />
+        {/* Blue → Purple gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-800/85 via-indigo-700/75 to-purple-700/85" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#fafbff] via-transparent to-transparent" />
       </div>
 
-      {/* Decorative blurs */}
+      {/* Decorative animated orbs */}
       <motion.div
         style={{ y }}
-        className="absolute top-20 right-20 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl"
+        className="absolute top-20 right-20 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl"
       />
       <motion.div
         style={{ y: useTransform(scrollYProgress, [0, 1], [0, 80]) }}
-        className="absolute bottom-20 left-20 w-96 h-96 bg-indigo-200/20 rounded-full blur-3xl"
+        className="absolute bottom-32 left-16 w-96 h-96 bg-blue-400/15 rounded-full blur-3xl"
+      />
+      <motion.div
+        className="absolute top-1/3 left-1/3 w-64 h-64 bg-indigo-300/10 rounded-full blur-3xl"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
 
       <motion.div
@@ -211,7 +219,7 @@ function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100/80 text-blue-700 text-sm font-medium mb-8"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-sm text-white/90 text-sm font-medium mb-8 border border-white/20"
         >
           <Sparkles className="w-4 h-4" />
           Institut d&apos;Educaci&oacute; Secund&agrave;ria &mdash; Manresa
@@ -221,11 +229,11 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="text-5xl sm:text-7xl font-bold text-gray-900 tracking-tight leading-[1.1] mb-6"
+          className="text-5xl sm:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6 drop-shadow-lg"
         >
           Pius Font
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-600">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-fuchsia-300 to-indigo-300">
             i Quer
           </span>
         </motion.h1>
@@ -234,7 +242,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           M&eacute;s de 40 anys formant persones al cor del Bages. ESO,
           Batxillerat i Cicles Formatius amb una aposta ferma per la
@@ -249,14 +257,14 @@ function Hero() {
         >
           <a
             href="#estudis"
-            className="group flex items-center gap-2 px-7 py-3.5 rounded-full bg-gray-900 text-white font-medium hover:bg-gray-700 transition-all"
+            className="group flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-gray-900 font-medium hover:bg-gray-100 transition-all shadow-lg shadow-black/10"
           >
             Descobreix els Estudis
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <a
             href="#historia"
-            className="px-7 py-3.5 rounded-full border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+            className="px-7 py-3.5 rounded-full border border-white/30 text-white font-medium hover:bg-white/10 transition-colors backdrop-blur-sm"
           >
             La nostra hist&ograve;ria
           </a>
@@ -273,7 +281,7 @@ function Hero() {
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <ChevronDown className="w-5 h-5 text-gray-400" />
+          <ChevronDown className="w-5 h-5 text-white/60" />
         </motion.div>
       </motion.div>
     </section>
@@ -313,7 +321,7 @@ function HistorySection() {
   ];
 
   return (
-    <section id="historia" className="py-32 bg-white">
+    <section id="historia" className="py-32 bg-geo-lines relative">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -325,7 +333,7 @@ function HistorySection() {
           <motion.div
             variants={fadeUp}
             custom={0}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 uppercase tracking-widest mb-4"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 uppercase tracking-widest mb-4"
           >
             <History className="w-4 h-4" />
             Un xic d&apos;hist&ograve;ria
@@ -337,7 +345,9 @@ function HistorySection() {
           >
             M&eacute;s de quatre d&egrave;cades
             <br className="hidden sm:block" />
-            formant persones
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-purple-600">
+              formant persones
+            </span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
@@ -353,7 +363,7 @@ function HistorySection() {
         {/* Timeline */}
         <div className="relative">
           {/* Center line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gray-200 md:-translate-x-px" />
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-blue-200 via-indigo-200 to-purple-200 md:-translate-x-px" />
 
           <div className="space-y-12">
             {timeline.map((item, i) => (
@@ -369,7 +379,7 @@ function HistorySection() {
                 }`}
               >
                 {/* Dot */}
-                <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-blue-600 rounded-full -translate-x-1.5 md:-translate-x-1.5 mt-2 ring-4 ring-white z-10" />
+                <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full -translate-x-1.5 md:-translate-x-1.5 mt-2 ring-4 ring-white z-10" />
 
                 {/* Content */}
                 <div
@@ -379,7 +389,7 @@ function HistorySection() {
                       : "md:pl-16 md:text-left"
                   }`}
                 >
-                  <span className="inline-block text-sm font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full mb-3">
+                  <span className="inline-block text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full mb-3">
                     {item.year}
                   </span>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -404,7 +414,7 @@ function HistorySection() {
    ═══════════════════════════════════════════════════════ */
 function PiusBio() {
   return (
-    <section id="piusfontquer" className="py-32 bg-gray-50/50">
+    <section id="piusfontquer" className="py-32 bg-section-alt relative">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -429,7 +439,10 @@ function PiusBio() {
               className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-6"
             >
               Pius Font
-              <br />i Quer
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-purple-600">
+                i Quer
+              </span>
             </motion.h2>
             <motion.p
               variants={fadeUp}
@@ -481,7 +494,7 @@ function PiusBio() {
               href="https://www.iespfq.cat/portal/el-centre/qui-va-ser-pius-font-i-quer/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-900 transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-medium text-indigo-700 hover:text-purple-700 transition-colors"
             >
               M&eacute;s informaci&oacute;
               <ExternalLink className="w-3.5 h-3.5" />
@@ -494,12 +507,12 @@ function PiusBio() {
             custom={2}
             className="relative"
           >
-            <div className="relative rounded-3xl bg-gradient-to-br from-emerald-50 via-white to-blue-50 border border-gray-100 p-10 sm:p-14">
+            <div className="relative rounded-3xl bg-gradient-to-br from-emerald-50 via-white to-indigo-50 border border-gray-100 p-10 sm:p-14 shadow-sm">
               <div className="absolute top-6 right-6 w-20 h-20 bg-emerald-100/50 rounded-full blur-2xl" />
-              <div className="absolute bottom-6 left-6 w-24 h-24 bg-blue-100/50 rounded-full blur-2xl" />
+              <div className="absolute bottom-6 left-6 w-24 h-24 bg-purple-100/50 rounded-full blur-2xl" />
 
               <div className="relative space-y-8">
-                <div className="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-100 to-indigo-100 flex items-center justify-center">
                   <Leaf className="w-8 h-8 text-emerald-600" />
                 </div>
 
@@ -525,7 +538,7 @@ function PiusBio() {
                       key={item}
                       className="flex items-center gap-3 text-sm text-gray-600"
                     >
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-indigo-500 shrink-0" />
                       {item}
                     </div>
                   ))}
@@ -574,7 +587,7 @@ function Programs() {
       subtitle: "CFGS Desenvolupament d\u2019Aplicacions",
       description:
         "Cicles de grau superior: Desenvolupament d\u2019Aplicacions Web (DAW) i Desenvolupament d\u2019Aplicacions Multiplataforma (DAM). Programaci\u00f3, bases de dades, entorns web i m\u00f2bil.",
-      color: "cyan",
+      color: "purple",
     },
     {
       icon: BriefcaseBusiness,
@@ -614,7 +627,7 @@ function Programs() {
     blue: "bg-blue-50 text-blue-600 group-hover:bg-blue-100",
     indigo: "bg-indigo-50 text-indigo-600 group-hover:bg-indigo-100",
     violet: "bg-violet-50 text-violet-600 group-hover:bg-violet-100",
-    cyan: "bg-cyan-50 text-cyan-600 group-hover:bg-cyan-100",
+    purple: "bg-purple-50 text-purple-600 group-hover:bg-purple-100",
     emerald: "bg-emerald-50 text-emerald-600 group-hover:bg-emerald-100",
     amber: "bg-amber-50 text-amber-600 group-hover:bg-amber-100",
     rose: "bg-rose-50 text-rose-600 group-hover:bg-rose-100",
@@ -622,7 +635,7 @@ function Programs() {
   };
 
   return (
-    <section id="estudis" className="py-32 bg-white">
+    <section id="estudis" className="py-32 bg-geo-lines relative">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -634,7 +647,7 @@ function Programs() {
           <motion.div
             variants={fadeUp}
             custom={0}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 uppercase tracking-widest mb-4"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 uppercase tracking-widest mb-4"
           >
             <Award className="w-4 h-4" />
             Qu&egrave; fem
@@ -644,7 +657,10 @@ function Programs() {
             custom={1}
             className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-6"
           >
-            Oferta educativa
+            Oferta{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-purple-600">
+              educativa
+            </span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
@@ -671,7 +687,7 @@ function Programs() {
                 key={program.title}
                 variants={fadeUp}
                 custom={i}
-                className="group p-6 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-gray-200 hover:shadow-lg hover:shadow-gray-100/50 hover:bg-white transition-all duration-300 cursor-default"
+                className="group p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-100 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-100/30 hover:bg-white transition-all duration-300 cursor-default"
               >
                 <div
                   className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 transition-colors duration-300 ${colorMap[program.color]}`}
@@ -681,7 +697,7 @@ function Programs() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">
                   {program.title}
                 </h3>
-                <p className="text-xs text-blue-600 font-medium mb-3">
+                <p className="text-xs text-indigo-600 font-medium mb-3">
                   {program.subtitle}
                 </p>
                 <p className="text-gray-500 text-sm leading-relaxed">
@@ -703,7 +719,7 @@ function Programs() {
             href="https://www.iespfq.cat/portal/el-centre/que-fem/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-900 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium text-indigo-700 hover:text-purple-700 transition-colors"
           >
             Veure tota l&apos;oferta formativa al portal
             <ExternalLink className="w-3.5 h-3.5" />
@@ -765,7 +781,7 @@ function Facilities() {
   ];
 
   return (
-    <section id="installacions" className="py-32 bg-gray-50/50">
+    <section id="installacions" className="py-32 bg-section-alt relative">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -777,7 +793,7 @@ function Facilities() {
           <motion.div
             variants={fadeUp}
             custom={0}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 uppercase tracking-widest mb-4"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 uppercase tracking-widest mb-4"
           >
             <Building2 className="w-4 h-4" />
             Equipaments i Serveis
@@ -787,7 +803,10 @@ function Facilities() {
             custom={1}
             className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-6"
           >
-            Les nostres instal&middot;lacions
+            Les nostres{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-purple-600">
+              instal&middot;lacions
+            </span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
@@ -812,7 +831,7 @@ function Facilities() {
               key={img.alt}
               variants={scaleIn}
               custom={i}
-              className="relative aspect-[4/3] rounded-2xl overflow-hidden group"
+              className="relative aspect-[4/3] rounded-2xl overflow-hidden group shadow-sm"
             >
               <Image
                 src={img.src}
@@ -843,10 +862,10 @@ function Facilities() {
                 key={f.title}
                 variants={fadeUp}
                 custom={i}
-                className="flex gap-4 p-6 rounded-2xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all duration-300"
+                className="flex gap-4 p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition-all duration-300"
               >
-                <div className="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
-                  <Icon className="w-5 h-5 text-blue-600" />
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center shrink-0">
+                  <Icon className="w-5 h-5 text-indigo-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-1">
@@ -872,7 +891,7 @@ function Facilities() {
             href="https://www.iespfq.cat/portal/el-centre/equipaments-i-serveis/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-900 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium text-indigo-700 hover:text-purple-700 transition-colors"
           >
             M&eacute;s sobre equipaments i serveis
             <ExternalLink className="w-3.5 h-3.5" />
@@ -915,7 +934,7 @@ function Values() {
   ];
 
   return (
-    <section id="valors" className="py-32 bg-white">
+    <section id="valors" className="py-32 bg-geo-lines relative">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -927,7 +946,7 @@ function Values() {
           <motion.p
             variants={fadeUp}
             custom={0}
-            className="text-sm font-semibold text-blue-700 uppercase tracking-widest mb-4"
+            className="text-sm font-semibold text-indigo-700 uppercase tracking-widest mb-4"
           >
             Filosofia
           </motion.p>
@@ -936,7 +955,10 @@ function Values() {
             custom={1}
             className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight"
           >
-            Els nostres valors
+            Els nostres{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-purple-600">
+              valors
+            </span>
           </motion.h2>
         </motion.div>
 
@@ -956,8 +978,8 @@ function Values() {
                 custom={i}
                 className="text-center group"
               >
-                <div className="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mx-auto mb-5 group-hover:bg-blue-100 transition-colors duration-300">
-                  <Icon className="w-7 h-7 text-blue-600" />
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center mx-auto mb-5 group-hover:from-blue-100 group-hover:to-purple-100 transition-all duration-300">
+                  <Icon className="w-7 h-7 text-indigo-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {value.title}
@@ -979,7 +1001,7 @@ function Values() {
    ═══════════════════════════════════════════════════════ */
 function CTA() {
   return (
-    <section className="py-32 bg-gray-50/50">
+    <section className="py-32 bg-section-alt relative">
       <div className="max-w-6xl mx-auto px-6 space-y-8">
         {/* Main CTA */}
         <motion.div
@@ -987,10 +1009,16 @@ function CTA() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={stagger}
-          className="relative rounded-3xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-12 sm:p-16 text-center overflow-hidden"
+          className="relative rounded-3xl bg-gradient-to-br from-blue-800 via-indigo-800 to-purple-800 p-12 sm:p-16 text-center overflow-hidden"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.15),transparent_50%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(99,102,241,0.1),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(139,92,246,0.2),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.15),transparent_50%)]" />
+          {/* Animated glow */}
+          <motion.div
+            className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"
+            animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          />
 
           <div className="relative z-10">
             <motion.h2
@@ -1003,7 +1031,7 @@ function CTA() {
             <motion.p
               variants={fadeUp}
               custom={1}
-              className="text-gray-400 text-lg max-w-xl mx-auto mb-10"
+              className="text-indigo-200/80 text-lg max-w-xl mx-auto mb-10"
             >
               Vine a con&egrave;ixer el nostre centre, les nostres
               instal&middot;lacions i el nostre equip. T&apos;esperem!
@@ -1017,7 +1045,7 @@ function CTA() {
                 href="https://www.iespfq.cat/portal/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-gray-900 font-medium hover:bg-gray-100 transition-colors"
+                className="group flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-gray-900 font-medium hover:bg-gray-100 transition-colors shadow-lg shadow-black/10"
               >
                 Visita el Portal
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -1038,7 +1066,7 @@ function CTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="rounded-2xl bg-white border border-gray-100 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-6"
+          className="rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-100 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-6 shadow-sm"
         >
           <div className="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center shrink-0">
             <Users className="w-7 h-7 text-amber-600" />
@@ -1100,7 +1128,7 @@ function Contact() {
   ];
 
   return (
-    <section id="contacte" className="py-32 bg-white">
+    <section id="contacte" className="py-32 bg-geo-lines relative">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -1112,7 +1140,7 @@ function Contact() {
           <motion.div
             variants={fadeUp}
             custom={0}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 uppercase tracking-widest mb-4"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 uppercase tracking-widest mb-4"
           >
             <MapPin className="w-4 h-4" />
             On som
@@ -1122,7 +1150,10 @@ function Contact() {
             custom={1}
             className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-6"
           >
-            Vine a veure&apos;ns
+            Vine a{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-purple-600">
+              veure&apos;ns
+            </span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
@@ -1149,10 +1180,10 @@ function Contact() {
                 key={item.title}
                 variants={fadeUp}
                 custom={i}
-                className="p-6 rounded-2xl bg-gray-50 border border-gray-100"
+                className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-100 hover:border-indigo-200 transition-colors"
               >
-                <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-blue-600" />
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-indigo-600" />
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">
                   {item.title}
@@ -1172,7 +1203,7 @@ function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="rounded-2xl overflow-hidden border border-gray-100 h-80"
+          className="rounded-2xl overflow-hidden border border-gray-100 h-80 shadow-sm"
         >
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2977.8!2d1.8287!3d41.7275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4f9a0e0b0b0b0%3A0x0!2sIES+Pius+Font+i+Quer!5e0!3m2!1sca!2ses!4v1700000000000"
@@ -1197,7 +1228,7 @@ function Contact() {
             href="https://www.iespfq.cat/portal/el-centre/on-som/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-900 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium text-indigo-700 hover:text-purple-700 transition-colors"
           >
             Com arribar-hi
             <ExternalLink className="w-3.5 h-3.5" />
@@ -1213,11 +1244,11 @@ function Contact() {
    ═══════════════════════════════════════════════════════ */
 function Footer() {
   return (
-    <footer className="py-12 bg-gray-50 border-t border-gray-100">
+    <footer className="py-12 border-t border-indigo-100/50 bg-white/60 backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-blue-700 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-700 to-purple-600 flex items-center justify-center">
               <span className="text-white font-bold text-xs">PFQ</span>
             </div>
             <span className="text-sm text-gray-500">
@@ -1229,7 +1260,7 @@ function Footer() {
               href="https://www.iespfq.cat/portal/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-gray-400 hover:text-gray-700 transition-colors"
+              className="text-sm text-gray-400 hover:text-indigo-700 transition-colors"
             >
               Portal Oficial
             </a>
@@ -1237,7 +1268,7 @@ function Footer() {
               href="https://www.iespfq.cat/portal/el-centre/un-xic-dhistoria/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-gray-400 hover:text-gray-700 transition-colors"
+              className="text-sm text-gray-400 hover:text-indigo-700 transition-colors"
             >
               Hist&ograve;ria
             </a>
@@ -1245,7 +1276,7 @@ function Footer() {
               href="https://sites.google.com/site/ampapiusfontiquer/home"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-gray-400 hover:text-gray-700 transition-colors"
+              className="text-sm text-gray-400 hover:text-indigo-700 transition-colors"
             >
               AMPA
             </a>
@@ -1265,7 +1296,7 @@ function Footer() {
    ═══════════════════════════════════════════════════════ */
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <Navbar />
       <Hero />
       <HistorySection />
