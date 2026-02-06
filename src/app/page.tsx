@@ -372,20 +372,20 @@ function HistorySection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={stagger}
-          className="text-center mb-20"
-        >
-          <motion.div
-            variants={fadeUp}
-            custom={0}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 uppercase tracking-widest mb-4"
+            className="text-center mb-12"
           >
-            <History className="w-4 h-4" />
-            Un xic d&apos;hist&ograve;ria
-          </motion.div>
-          <motion.h2
-            variants={fadeUp}
-            custom={1}
-            className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-6"
+            <motion.div
+              variants={fadeUp}
+              custom={0}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 uppercase tracking-widest mb-3"
+            >
+              <History className="w-4 h-4" />
+              Un xic d&apos;hist&ograve;ria
+            </motion.div>
+            <motion.h2
+              variants={fadeUp}
+              custom={1}
+              className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight mb-4"
           >
             M&eacute;s de quatre d&egrave;cades
             <br className="hidden sm:block" />
