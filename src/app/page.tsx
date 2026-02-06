@@ -1558,8 +1558,9 @@ export default function Home() {
       <Programs />
       <Facilities />
       <Values />
-      <CTA />
-      <Contact />
+        <CTA />
+        <Social />
+        <Contact />
       <Footer />
     </div>
   );
