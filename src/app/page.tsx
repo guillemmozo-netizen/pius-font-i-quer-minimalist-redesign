@@ -1230,7 +1230,7 @@ function CTA() {
    ═══════════════════════════════════════════════════════ */
 function Social() {
   return (
-    <section className="py-32 bg-geo-lines relative">
+    <section id="xarxes" className="py-32 bg-geo-lines relative">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
