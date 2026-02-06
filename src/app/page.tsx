@@ -1035,7 +1035,7 @@ function Values() {
                     className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center mx-auto mb-5 group-hover:from-blue-100 group-hover:to-purple-100 transition-all duration-300"
                   >
                   <Icon className="w-7 h-7 text-indigo-600" />
-                </div>
+                  </motion.div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {value.title}
                 </h3>
