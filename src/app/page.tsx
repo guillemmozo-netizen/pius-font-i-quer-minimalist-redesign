@@ -60,7 +60,7 @@ const scaleIn = {
 
 /* ─── images ─── */
 const IMAGES = {
-  hero: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/Diseno-sin-titulo-1770407934569.png?width=8000&height=8000&resize=contain",
+  hero: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/Diseno-sin-titulo_Nero_AI_Image_Upscaler_Photo-resized-1770408139233.webp?width=8000&height=8000&resize=contain",
   patio: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170217_141444-xs-1770405520006.jpg?width=8000&height=8000&resize=contain",
   pingpong: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170421_130826-xs-1770405519854.jpg?width=8000&height=8000&resize=contain",
   corridor1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170912_170647-xs-1770405519842.jpg?width=8000&height=8000&resize=contain",
