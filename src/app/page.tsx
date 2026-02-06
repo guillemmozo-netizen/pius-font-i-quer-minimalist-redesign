@@ -248,46 +248,56 @@ function Hero() {
         style={{ opacity }}
         className="relative z-10 max-w-4xl mx-auto px-6 text-center -mt-36"
       >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-sm text-white/90 text-sm font-medium mb-8 border border-white/20"
-        >
-          <Sparkles className="w-4 h-4" />
-          Institut d&apos;Educaci&oacute; Secund&agrave;ria &mdash; Manresa
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-sm text-white/90 text-sm font-medium mb-8 border border-white/20"
+          >
+            <motion.span
+              animate={{ rotate: [0, 15, -15, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Sparkles className="w-4 h-4" />
+            </motion.span>
+            Institut d&apos;Educaci&oacute; Secund&agrave;ria &mdash; Manresa
+          </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="text-6xl sm:text-8xl font-bold text-white tracking-tight leading-[1.1] mb-6 drop-shadow-lg"
-        >
-          Pius Font
-          <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-fuchsia-300 to-indigo-300">
-            i Quer
-          </span>
-        </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 40, filter: "blur(12px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="text-6xl sm:text-8xl font-bold text-white tracking-tight leading-[1.1] mb-6 drop-shadow-lg"
+          >
+            Pius Font
+            <br />
+            <motion.span
+              initial={{ opacity: 0, x: -30, filter: "blur(8px)" }}
+              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-fuchsia-300 to-indigo-300"
+            >
+              i Quer
+            </motion.span>
+          </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed"
-        >
-          M&eacute;s de 40 anys formant persones al cor del Bages. ESO,
-          Batxillerat i Cicles Formatius amb una aposta ferma per la
-          innovaci&oacute; i l&apos;excel&middot;l&egrave;ncia.
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 25, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed"
+          >
+            M&eacute;s de 40 anys formant persones al cor del Bages. ESO,
+            Batxillerat i Cicles Formatius amb una aposta ferma per la
+            innovaci&oacute; i l&apos;excel&middot;l&egrave;ncia.
+          </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.45 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
+          <motion.div
+            initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.6, delay: 0.55 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
           <a
             href="#estudis"
             className="group flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-gray-900 font-medium hover:bg-gray-100 transition-all shadow-lg shadow-black/10"
