@@ -32,6 +32,7 @@ import {
   Award,
   Microscope,
   BriefcaseBusiness,
+  Home,
 } from "lucide-react";
 import Image from "next/image";
 
