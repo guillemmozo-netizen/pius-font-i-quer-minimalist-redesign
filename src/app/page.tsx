@@ -597,10 +597,10 @@ function PiusBio() {
                       {item}
                     </div>
                   ))}
+                  </div>
                 </div>
-              </div>
-            </div>
-          </motion.div>
+              </motion.div>
+            </motion.div>
         </motion.div>
       </div>
     </section>
