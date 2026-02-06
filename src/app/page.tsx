@@ -944,23 +944,75 @@ function Facilities() {
           })}
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center mt-12"
-        >
-          <a
-            href="https://www.iespfq.cat/portal/el-centre/equipaments-i-serveis/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-medium text-indigo-700 hover:text-purple-700 transition-colors"
+          {/* Full services list */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={stagger}
+            className="mt-12 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-100 p-8 sm:p-10"
           >
-            M&eacute;s sobre equipaments i serveis
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
-        </motion.div>
+            <motion.h3
+              variants={fadeUp}
+              custom={0}
+              className="text-lg font-semibold text-gray-900 mb-6"
+            >
+              Tots els serveis i espais
+            </motion.h3>
+            <motion.div
+              variants={fadeUp}
+              custom={1}
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3"
+            >
+              {[
+                "Servei d'orientació",
+                "Servei psico-pedagògic",
+                "Biblioteca",
+                "Club de lectura",
+                "Serveis administratius",
+                "Aules d'informàtica",
+                "Laboratori de Física i Química",
+                "Laboratori de Ciències Naturals",
+                "Aules de Tecnologia",
+                "Aula d'Anglès",
+                "Aula de Francès",
+                "Aula de Música",
+                "Aula de Dibuix",
+                "Aula d'Àudiovisuals",
+                "Gimnàs",
+                "Patis i camps d'esport",
+                "Hivernacle",
+                "Taller de manteniment",
+                "Servei de copisteria",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-2.5 text-sm text-gray-600"
+                >
+                  <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 shrink-0" />
+                  {item}
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-center mt-12"
+          >
+            <a
+              href="https://www.iespfq.cat/portal/el-centre/equipaments-i-serveis/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-indigo-700 hover:text-purple-700 transition-colors"
+            >
+              M&eacute;s sobre equipaments i serveis
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </motion.div>
       </div>
     </section>
   );
