@@ -365,7 +365,7 @@ function HistorySection() {
   ];
 
   return (
-    <section id="historia" className="py-32 bg-geo-lines relative">
+      <section id="historia" className="py-20 bg-geo-lines relative">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
