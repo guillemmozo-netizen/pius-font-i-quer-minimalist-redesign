@@ -762,9 +762,9 @@ function Facilities() {
     },
     {
       icon: UtensilsCrossed,
-      title: "Servei de menjador",
+      title: "Cantina",
       description:
-        "Menjador escolar amb menjar saludable i equilibrat, adaptat a les necessitats diet\u00e8tiques dels alumnes.",
+        "Lloc per a comprar begudes, llaminadures, pizzes o cruasants.",
     },
     {
       icon: Building2,
