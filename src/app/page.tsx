@@ -1021,13 +1021,19 @@ function Values() {
           {values.map((value, i) => {
             const Icon = value.icon;
             return (
-              <motion.div
-                key={value.title}
-                variants={fadeUp}
-                custom={i}
-                className="text-center group"
-              >
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center mx-auto mb-5 group-hover:from-blue-100 group-hover:to-purple-100 transition-all duration-300">
+                <motion.div
+                  key={value.title}
+                  variants={scaleIn}
+                  custom={i}
+                  whileHover={{ y: -8 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="text-center group"
+                >
+                  <motion.div
+                    whileHover={{ rotate: [0, -10, 10, 0] }}
+                    transition={{ duration: 0.5 }}
+                    className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center mx-auto mb-5 group-hover:from-blue-100 group-hover:to-purple-100 transition-all duration-300"
+                  >
                   <Icon className="w-7 h-7 text-indigo-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
