@@ -194,7 +194,7 @@ function Hero() {
           />
           {/* Blue → Purple gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-blue-800/70 via-indigo-700/55 to-purple-700/65" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#fafbff] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#f0f4ff] via-transparent to-transparent" />
       </div>
 
       {/* Decorative animated orbs */}
