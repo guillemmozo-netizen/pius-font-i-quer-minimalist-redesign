@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
 import {
   BookOpen,
   GraduationCap,
@@ -19,8 +19,23 @@ import {
   Globe,
   Heart,
   Target,
+  Building2,
+  Leaf,
+  Monitor,
+  Dumbbell,
+  UtensilsCrossed,
+  Library,
+  Menu,
+  X,
+  ExternalLink,
+  History,
+  Award,
+  Microscope,
+  BriefcaseBusiness,
 } from "lucide-react";
+import Image from "next/image";
 
+/* ─── animation variants ─── */
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
@@ -34,7 +49,36 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.08 } },
 };
 
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: (i: number) => ({
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
+
+/* ─── images ─── */
+const IMAGES = {
+  patio: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170217_141444-xs-1770405520006.jpg?width=8000&height=8000&resize=contain",
+  pingpong: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170421_130826-xs-1770405519854.jpg?width=8000&height=8000&resize=contain",
+  corridor1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170912_170647-xs-1770405519842.jpg?width=8000&height=8000&resize=contain",
+  corridor2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170912_170920-xs-1770405519840.jpg?width=8000&height=8000&resize=contain",
+};
+
+/* ═══════════════════════════════════════════════════════
+   NAVBAR
+   ═══════════════════════════════════════════════════════ */
 function Navbar() {
+  const [open, setOpen] = useState(false);
+  const links = [
+    { label: "Història", href: "#historia" },
+    { label: "Pius Font i Quer", href: "#piusfontquer" },
+    { label: "Estudis", href: "#estudis" },
+    { label: "Instal·lacions", href: "#installacions" },
+    { label: "Contacte", href: "#contacte" },
+  ];
+
   return (
     <motion.nav
       initial={{ y: -20, opacity: 0 }}
@@ -48,34 +92,21 @@ function Navbar() {
             <span className="text-white font-bold text-sm">PFQ</span>
           </div>
           <span className="font-semibold text-gray-900 hidden sm:block">
-            Pius Font i Quer
+            IES Pius Font i Quer
           </span>
         </a>
-        <div className="flex items-center gap-8">
-          <a
-            href="#sobre"
-            className="text-sm text-gray-500 hover:text-gray-900 transition-colors hidden md:block"
-          >
-            Sobre Nosaltres
-          </a>
-          <a
-            href="#estudis"
-            className="text-sm text-gray-500 hover:text-gray-900 transition-colors hidden md:block"
-          >
-            Estudis
-          </a>
-          <a
-            href="#valors"
-            className="text-sm text-gray-500 hover:text-gray-900 transition-colors hidden md:block"
-          >
-            Valors
-          </a>
-          <a
-            href="#contacte"
-            className="text-sm text-gray-500 hover:text-gray-900 transition-colors hidden md:block"
-          >
-            Contacte
-          </a>
+
+        {/* Desktop */}
+        <div className="hidden lg:flex items-center gap-7">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              {l.label}
+            </a>
+          ))}
           <a
             href="https://www.iespfq.cat/portal/"
             target="_blank"
@@ -85,11 +116,57 @@ function Navbar() {
             Portal
           </a>
         </div>
+
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="lg:hidden p-2 text-gray-600"
+          aria-label="Menu"
+        >
+          {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
+          >
+            <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-3">
+              {links.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="text-sm text-gray-600 py-2"
+                >
+                  {l.label}
+                </a>
+              ))}
+              <a
+                href="https://www.iespfq.cat/portal/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium px-4 py-2 rounded-full bg-gray-900 text-white text-center"
+              >
+                Portal
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
 
+/* ═══════════════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════════════ */
 function Hero() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -104,16 +181,26 @@ function Hero() {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50" />
-      {/* Decorative shapes */}
+      {/* Background image with overlay */}
+      <div className="absolute inset-0">
+        <Image
+          src={IMAGES.patio}
+          alt="Pati de l'institut"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-white/95" />
+      </div>
+
+      {/* Decorative blurs */}
       <motion.div
         style={{ y }}
-        className="absolute top-20 right-20 w-72 h-72 bg-blue-100/40 rounded-full blur-3xl"
+        className="absolute top-20 right-20 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl"
       />
       <motion.div
         style={{ y: useTransform(scrollYProgress, [0, 1], [0, 80]) }}
-        className="absolute bottom-20 left-20 w-96 h-96 bg-indigo-100/30 rounded-full blur-3xl"
+        className="absolute bottom-20 left-20 w-96 h-96 bg-indigo-200/20 rounded-full blur-3xl"
       />
 
       <motion.div
@@ -127,7 +214,7 @@ function Hero() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100/80 text-blue-700 text-sm font-medium mb-8"
         >
           <Sparkles className="w-4 h-4" />
-          Institut d&apos;Educaci&oacute; Secund&agrave;ria
+          Institut d&apos;Educaci&oacute; Secund&agrave;ria &mdash; Manresa
         </motion.div>
 
         <motion.h1
@@ -147,11 +234,11 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Formem el futur a Manresa. Educaci&oacute; de qualitat en ESO,
-          Batxillerat i Cicles Formatius amb innovaci&oacute; i
-          comprom&iacute;s.
+          M&eacute;s de 40 anys formant persones al cor del Bages. ESO,
+          Batxillerat i Cicles Formatius amb una aposta ferma per la
+          innovaci&oacute; i l&apos;excel&middot;l&egrave;ncia.
         </motion.p>
 
         <motion.div
@@ -168,10 +255,10 @@ function Hero() {
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
           <a
-            href="#contacte"
-            className="px-7 py-3.5 rounded-full border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+            href="#historia"
+            className="px-7 py-3.5 rounded-full border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-colors"
           >
-            Contacta&apos;ns
+            La nostra hist&ograve;ria
           </a>
         </motion.div>
       </motion.div>
@@ -193,16 +280,131 @@ function Hero() {
   );
 }
 
-function About() {
-  const stats = [
-    { number: "1970", label: "Any de fundaci\u00f3" },
-    { number: "1200+", label: "Alumnes" },
-    { number: "100+", label: "Professors" },
-    { number: "50+", label: "Anys d\u2019excel\u00b7l\u00e8ncia" },
+/* ═══════════════════════════════════════════════════════
+   HISTORY
+   ═══════════════════════════════════════════════════════ */
+function HistorySection() {
+  const timeline = [
+    {
+      year: "1974",
+      title: "Fundaci\u00f3 del centre",
+      text: "Es crea l\u2019Institut de Formaci\u00f3 Professional al barri de la Font dels Capellans de Manresa, per donar resposta a la creixent demanda educativa de la comarca del Bages.",
+    },
+    {
+      year: "1980s",
+      title: "Consolidaci\u00f3 i creixement",
+      text: "El centre es consolida amb noves especialitats de Formaci\u00f3 Professional i amplia la seva oferta formativa, convertint-se en un referent educatiu a la ciutat.",
+    },
+    {
+      year: "1996",
+      title: "IES Pius Font i Quer",
+      text: "Amb la reforma educativa (LOGSE), el centre es transforma en Institut d\u2019Educaci\u00f3 Secund\u00e0ria i adopta el nom del il\u00b7lustre bot\u00e0nic Pius Font i Quer, fill de Lleida i vinculat a la ci\u00e8ncia catalana.",
+    },
+    {
+      year: "2000s",
+      title: "Modernitzaci\u00f3",
+      text: "S\u2019incorporen els Cicles Formatius de Grau Mitj\u00e0 i Superior en fam\u00edlies com Inform\u00e0tica, Administraci\u00f3 i Sanitat, i es renoven les instal\u00b7lacions amb laboratoris i aules d\u2019inform\u00e0tica actualitzades.",
+    },
+    {
+      year: "Avui",
+      title: "Un centre de refer\u00e8ncia",
+      text: "Actualment, l\u2019IES Pius Font i Quer ofereix ESO, Batxillerat i m\u00faltiples Cicles Formatius. M\u00e9s de 1.200 alumnes i un equip de m\u00e9s de 100 professionals treballen cada dia per una educaci\u00f3 de qualitat.",
+    },
   ];
 
   return (
-    <section id="sobre" className="py-32 bg-white">
+    <section id="historia" className="py-32 bg-white">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="text-center mb-20"
+        >
+          <motion.div
+            variants={fadeUp}
+            custom={0}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 uppercase tracking-widest mb-4"
+          >
+            <History className="w-4 h-4" />
+            Un xic d&apos;hist&ograve;ria
+          </motion.div>
+          <motion.h2
+            variants={fadeUp}
+            custom={1}
+            className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-6"
+          >
+            M&eacute;s de quatre d&egrave;cades
+            <br className="hidden sm:block" />
+            formant persones
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            custom={2}
+            className="text-gray-500 text-lg max-w-2xl mx-auto"
+          >
+            Des de 1974, el nostre institut ha evolucionat amb la societat,
+            mantenint sempre el comprom&iacute;s amb l&apos;educaci&oacute; de qualitat al
+            Bages.
+          </motion.p>
+        </motion.div>
+
+        {/* Timeline */}
+        <div className="relative">
+          {/* Center line */}
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gray-200 md:-translate-x-px" />
+
+          <div className="space-y-12">
+            {timeline.map((item, i) => (
+              <motion.div
+                key={item.year}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={fadeUp}
+                custom={0}
+                className={`relative flex flex-col md:flex-row gap-8 md:gap-16 ${
+                  i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                }`}
+              >
+                {/* Dot */}
+                <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-blue-600 rounded-full -translate-x-1.5 md:-translate-x-1.5 mt-2 ring-4 ring-white z-10" />
+
+                {/* Content */}
+                <div
+                  className={`md:w-1/2 pl-12 md:pl-0 ${
+                    i % 2 === 0
+                      ? "md:pr-16 md:text-right"
+                      : "md:pl-16 md:text-left"
+                  }`}
+                >
+                  <span className="inline-block text-sm font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full mb-3">
+                    {item.year}
+                  </span>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-500 leading-relaxed">{item.text}</p>
+                </div>
+
+                {/* Spacer for the other side */}
+                <div className="hidden md:block md:w-1/2" />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════
+   PIUS FONT I QUER - BIOGRAPHY
+   ═══════════════════════════════════════════════════════ */
+function PiusBio() {
+  return (
+    <section id="piusfontquer" className="py-32 bg-gray-50/50">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -211,64 +413,125 @@ function About() {
           variants={stagger}
           className="grid md:grid-cols-2 gap-16 items-center"
         >
+          {/* Left: bio text */}
           <div>
-            <motion.p
+            <motion.div
               variants={fadeUp}
               custom={0}
-              className="text-sm font-semibold text-blue-700 uppercase tracking-widest mb-4"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 uppercase tracking-widest mb-4"
             >
-              Sobre Nosaltres
-            </motion.p>
+              <Leaf className="w-4 h-4" />
+              Qui va ser?
+            </motion.div>
             <motion.h2
               variants={fadeUp}
               custom={1}
               className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-6"
             >
-              Educaci&oacute; amb
-              <br />
-              valors i futur
+              Pius Font
+              <br />i Quer
             </motion.h2>
             <motion.p
               variants={fadeUp}
               custom={2}
-              className="text-gray-500 text-lg leading-relaxed mb-6"
+              className="text-gray-500 text-lg leading-relaxed mb-5"
             >
-              L&apos;IES Pius Font i Quer &eacute;s un centre educatiu p&uacute;blic situat a
-              Manresa, referent en la formaci&oacute; integral dels seus alumnes
-              des de fa m&eacute;s de cinc d&egrave;cades.
+              <strong className="text-gray-700">Pius Font i Quer</strong>{" "}
+              (Lleida, 1888 &ndash; Barcelona, 1964) va ser un dels
+              bot&agrave;nics m&eacute;s importants d&apos;Espanya i de
+              l&apos;&agrave;mbit mediterrani del segle XX. Llicenciat en
+              Farm&agrave;cia i Doctor en Ci&egrave;ncies Naturals, va dedicar
+              la seva vida a l&apos;estudi de la flora ib&egrave;rica i
+              nord-africana.
             </motion.p>
             <motion.p
               variants={fadeUp}
               custom={3}
-              className="text-gray-500 text-lg leading-relaxed"
+              className="text-gray-500 text-lg leading-relaxed mb-5"
             >
-              Oferim una educaci&oacute; de qualitat que combina
-              excel&middot;l&egrave;ncia acad&egrave;mica, innovaci&oacute;
-              pedag&ograve;gica i atenci&oacute; personalitzada, preparant els
-              nostres estudiants per als reptes del futur.
+              Va ser catedr&agrave;tic de Bot&agrave;nica a la Universitat de
+              Barcelona i director de la secci&oacute; de Bot&agrave;nica del
+              Museu de Ci&egrave;ncies Naturals. La seva obra m&eacute;s
+              destacada, la{" "}
+              <em className="text-gray-700">
+                Flora de Catalunya
+              </em>
+              , &eacute;s encara avui una refer&egrave;ncia fonamental.
             </motion.p>
+            <motion.p
+              variants={fadeUp}
+              custom={4}
+              className="text-gray-500 text-lg leading-relaxed mb-8"
+            >
+              Va crear un extens herbari amb m&eacute;s de 200.000 plecs i va
+              publicar obres cab&eacute;dals com el{" "}
+              <em className="text-gray-700">
+                Diccionario de Bot&aacute;nica
+              </em>{" "}
+              i{" "}
+              <em className="text-gray-700">
+                Plantas Medicinales: el Diosc&oacute;rides renovado
+              </em>
+              . El nostre institut porta el seu nom en homenatge al seu
+              llegat cient&iacute;fic i a la seva passió pel coneixement.
+            </motion.p>
+            <motion.a
+              variants={fadeUp}
+              custom={5}
+              href="https://www.iespfq.cat/portal/el-centre/qui-va-ser-pius-font-i-quer/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-900 transition-colors"
+            >
+              M&eacute;s informaci&oacute;
+              <ExternalLink className="w-3.5 h-3.5" />
+            </motion.a>
           </div>
 
+          {/* Right: decorative card */}
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={stagger}
-            className="grid grid-cols-2 gap-4"
+            variants={scaleIn}
+            custom={2}
+            className="relative"
           >
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                variants={fadeUp}
-                custom={i}
-                className="p-8 rounded-2xl bg-gray-50 border border-gray-100 hover:border-blue-100 hover:bg-blue-50/30 transition-colors duration-300"
-              >
-                <div className="text-3xl font-bold text-gray-900 mb-1">
-                  {stat.number}
+            <div className="relative rounded-3xl bg-gradient-to-br from-emerald-50 via-white to-blue-50 border border-gray-100 p-10 sm:p-14">
+              <div className="absolute top-6 right-6 w-20 h-20 bg-emerald-100/50 rounded-full blur-2xl" />
+              <div className="absolute bottom-6 left-6 w-24 h-24 bg-blue-100/50 rounded-full blur-2xl" />
+
+              <div className="relative space-y-8">
+                <div className="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center">
+                  <Leaf className="w-8 h-8 text-emerald-600" />
                 </div>
-                <div className="text-sm text-gray-500">{stat.label}</div>
-              </motion.div>
-            ))}
+
+                <div className="space-y-4">
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-4xl font-bold text-gray-900">1888</span>
+                    <span className="text-gray-400">&ndash;</span>
+                    <span className="text-4xl font-bold text-gray-900">1964</span>
+                  </div>
+                  <p className="text-sm text-gray-500 uppercase tracking-widest">
+                    Lleida &mdash; Barcelona
+                  </p>
+                </div>
+
+                <div className="space-y-3">
+                  {[
+                    "Catedràtic de Botànica (UB)",
+                    "Autor de Flora de Catalunya",
+                    "Herbari de +200.000 plecs",
+                    "Dioscórides renovado",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-center gap-3 text-sm text-gray-600"
+                    >
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
@@ -276,6 +539,9 @@ function About() {
   );
 }
 
+/* ═══════════════════════════════════════════════════════
+   WHAT WE DO (Què fem)
+   ═══════════════════════════════════════════════════════ */
 function Programs() {
   const programs = [
     {
@@ -283,47 +549,63 @@ function Programs() {
       title: "ESO",
       subtitle: "Educaci\u00f3 Secund\u00e0ria Obligat\u00f2ria",
       description:
-        "Formaci\u00f3 integral de 1r a 4t d\u2019ESO amb atenci\u00f3 a la diversitat i projectes interdisciplinaris.",
+        "De 1r a 4t d\u2019ESO. Formaci\u00f3 integral, atenci\u00f3 a la diversitat, tutoria personalitzada i projectes interdisciplinaris. Preparem els alumnes per al Batxillerat o els Cicles Formatius.",
       color: "blue",
     },
     {
       icon: GraduationCap,
       title: "Batxillerat",
-      subtitle: "Cient\u00edfic, Human\u00edstic i Social",
+      subtitle: "Cient\u00edfic-Tecnol\u00f2gic i Humanistic-Social",
       description:
-        "Preparaci\u00f3 per a la universitat amb excel\u00b7l\u00e8ncia acad\u00e8mica i orientaci\u00f3 personalitzada.",
+        "Dos cursos acad\u00e8mics amb dues modalitats. Preparaci\u00f3 rigorosa per a les PAU i l\u2019acc\u00e9s a la universitat, amb orientaci\u00f3 acad\u00e8mica i professional.",
       color: "indigo",
     },
     {
       icon: Cpu,
-      title: "Inform\u00e0tica",
-      subtitle: "Cicles Formatius",
+      title: "Inform\u00e0tica i Comunicacions",
+      subtitle: "CFGM Sistemes Microinform\u00e0tics i Xarxes",
       description:
-        "Desenvolupament d\u2019aplicacions web i multiplataforma. Administraci\u00f3 de sistemes inform\u00e0tics.",
+        "Cicle formatiu de grau mitj\u00e0. Instal\u00b7laci\u00f3, configuraci\u00f3 i manteniment de sistemes microinform\u00e0tics, xarxes locals i serveis b\u00e0sics.",
       color: "violet",
     },
     {
-      icon: FlaskConical,
-      title: "Ci\u00e8ncies",
-      subtitle: "Laboratori i Recerca",
+      icon: Monitor,
+      title: "DAW / DAM",
+      subtitle: "CFGS Desenvolupament d\u2019Aplicacions",
       description:
-        "An\u00e0lisis cl\u00edniques, qu\u00edmica i laboratoris amb equipament modern i pr\u00e0ctiques reals.",
-      color: "emerald",
+        "Cicles de grau superior: Desenvolupament d\u2019Aplicacions Web (DAW) i Desenvolupament d\u2019Aplicacions Multiplataforma (DAM). Programaci\u00f3, bases de dades, entorns web i m\u00f2bil.",
+      color: "cyan",
     },
     {
-      icon: Users,
-      title: "Administraci\u00f3",
-      subtitle: "Gesti\u00f3 Empresarial",
+      icon: BriefcaseBusiness,
+      title: "Administraci\u00f3 i Gesti\u00f3",
+      subtitle: "CFGM Gesti\u00f3 Administrativa",
       description:
-        "Administraci\u00f3 i finances, gesti\u00f3 administrativa amb pr\u00e0ctiques en empreses del territori.",
+        "Gesti\u00f3 administrativa, comptabilitat, atenci\u00f3 al client i tr\u00e0mits burocr\u00e0tics. Inclou pr\u00e0ctiques en empreses de la comarca del Bages.",
       color: "amber",
     },
     {
-      icon: Palette,
-      title: "Activitats",
-      subtitle: "Extraescolars i Projectes",
+      icon: FlaskConical,
+      title: "Sanitat i Laboratori",
+      subtitle: "CFGM Cures d\u2019Auxiliar d\u2019Infermeria",
       description:
-        "Esports, arts, intercanvis internacionals i projectes comunitaris que enriqueixen la formaci\u00f3.",
+        "Formaci\u00f3 en l\u2019\u00e0mbit sanitari: cures b\u00e0siques d\u2019infermeria, higi\u00e8ne, alimentaci\u00f3 i atenci\u00f3 al pacient. Pr\u00e0ctiques en centres sanitaris.",
+      color: "emerald",
+    },
+    {
+      icon: Microscope,
+      title: "Laboratori",
+      subtitle: "CFGS Laboratori d\u2019An\u00e0lisi i Control de Qualitat",
+      description:
+        "Cicle de grau superior: an\u00e0lisis qu\u00edmiques, instrumentals i microbiol\u00f2giques. Treball en laboratoris amb equipament modern.",
+      color: "teal",
+    },
+    {
+      icon: Palette,
+      title: "Activitats i Projectes",
+      subtitle: "Extraescolars, Erasmus+ i Sortides",
+      description:
+        "Intercanvis internacionals (Erasmus+), jornades culturals, esports, teatre i projectes comunitaris que complementen la formaci\u00f3 acad\u00e8mica.",
       color: "rose",
     },
   ];
@@ -332,13 +614,15 @@ function Programs() {
     blue: "bg-blue-50 text-blue-600 group-hover:bg-blue-100",
     indigo: "bg-indigo-50 text-indigo-600 group-hover:bg-indigo-100",
     violet: "bg-violet-50 text-violet-600 group-hover:bg-violet-100",
+    cyan: "bg-cyan-50 text-cyan-600 group-hover:bg-cyan-100",
     emerald: "bg-emerald-50 text-emerald-600 group-hover:bg-emerald-100",
     amber: "bg-amber-50 text-amber-600 group-hover:bg-amber-100",
     rose: "bg-rose-50 text-rose-600 group-hover:bg-rose-100",
+    teal: "bg-teal-50 text-teal-600 group-hover:bg-teal-100",
   };
 
   return (
-    <section id="estudis" className="py-32 bg-gray-50/50">
+    <section id="estudis" className="py-32 bg-white">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -347,27 +631,29 @@ function Programs() {
           variants={stagger}
           className="text-center mb-16"
         >
-          <motion.p
+          <motion.div
             variants={fadeUp}
             custom={0}
-            className="text-sm font-semibold text-blue-700 uppercase tracking-widest mb-4"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 uppercase tracking-widest mb-4"
           >
-            Oferta Educativa
-          </motion.p>
+            <Award className="w-4 h-4" />
+            Qu&egrave; fem
+          </motion.div>
           <motion.h2
             variants={fadeUp}
             custom={1}
             className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-6"
           >
-            Els nostres estudis
+            Oferta educativa
           </motion.h2>
           <motion.p
             variants={fadeUp}
             custom={2}
             className="text-gray-500 text-lg max-w-2xl mx-auto"
           >
-            Una oferta formativa &agrave;mplia i diversa per a cada etapa del
-            teu cam&iacute; educatiu.
+            Una formaci&oacute; completa i diversa: des de l&apos;ESO fins als
+            Cicles Formatius de Grau Superior, passant pel Batxillerat. Tot en
+            un sol centre.
           </motion.p>
         </motion.div>
 
@@ -376,7 +662,7 @@ function Programs() {
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={stagger}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5"
         >
           {programs.map((program, i) => {
             const Icon = program.icon;
@@ -385,17 +671,17 @@ function Programs() {
                 key={program.title}
                 variants={fadeUp}
                 custom={i}
-                className="group p-7 rounded-2xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-lg hover:shadow-gray-100/50 transition-all duration-300 cursor-default"
+                className="group p-6 rounded-2xl bg-gray-50/80 border border-gray-100 hover:border-gray-200 hover:shadow-lg hover:shadow-gray-100/50 hover:bg-white transition-all duration-300 cursor-default"
               >
                 <div
-                  className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300 ${colorMap[program.color]}`}
+                  className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 transition-colors duration-300 ${colorMap[program.color]}`}
                 >
-                  <Icon className="w-6 h-6" />
+                  <Icon className="w-5 h-5" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-1">
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">
                   {program.title}
                 </h3>
-                <p className="text-sm text-blue-600 font-medium mb-3">
+                <p className="text-xs text-blue-600 font-medium mb-3">
                   {program.subtitle}
                 </p>
                 <p className="text-gray-500 text-sm leading-relaxed">
@@ -405,11 +691,201 @@ function Programs() {
             );
           })}
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-center mt-12"
+        >
+          <a
+            href="https://www.iespfq.cat/portal/el-centre/que-fem/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-900 transition-colors"
+          >
+            Veure tota l&apos;oferta formativa al portal
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );
 }
 
+/* ═══════════════════════════════════════════════════════
+   FACILITIES (Instal·lacions i Equipaments)
+   ═══════════════════════════════════════════════════════ */
+function Facilities() {
+  const facilities = [
+    {
+      icon: Monitor,
+      title: "Aules d\u2019inform\u00e0tica",
+      description:
+        "M\u00faltiples aules equipades amb ordinadors d\u2019\u00faltima generaci\u00f3, projectors i connexi\u00f3 a internet d\u2019alta velocitat.",
+    },
+    {
+      icon: FlaskConical,
+      title: "Laboratoris",
+      description:
+        "Laboratoris de qu\u00edmica, f\u00edsica i biologia completament equipats per a pr\u00e0ctiques experimentals.",
+    },
+    {
+      icon: Library,
+      title: "Biblioteca",
+      description:
+        "Espai de lectura i estudi amb fons bibliogr\u00e0fic actualitzat, acc\u00e9s a internet i zones de treball en grup.",
+    },
+    {
+      icon: Dumbbell,
+      title: "Instal\u00b7lacions esportives",
+      description:
+        "Pista poliesportiva exterior, gimn\u00e0s cobert i zona de ping-pong per a l\u2019activitat f\u00edsica i l\u2019esbarjo.",
+    },
+    {
+      icon: UtensilsCrossed,
+      title: "Servei de menjador",
+      description:
+        "Menjador escolar amb menjar saludable i equilibrat, adaptat a les necessitats diet\u00e8tiques dels alumnes.",
+    },
+    {
+      icon: Building2,
+      title: "Aules espec\u00edfiques",
+      description:
+        "Sales de m\u00fasica, tecnologia, dibuix i aules polivalents per a projectes i activitats especials.",
+    },
+  ];
+
+  const galleryImages = [
+    { src: IMAGES.pingpong, alt: "Zona de ping-pong al pati" },
+    { src: IMAGES.corridor1, alt: "Passadís de l'institut" },
+    { src: IMAGES.corridor2, alt: "Passadís amb colors vius" },
+    { src: IMAGES.patio, alt: "Pista poliesportiva" },
+  ];
+
+  return (
+    <section id="installacions" className="py-32 bg-gray-50/50">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+          className="text-center mb-16"
+        >
+          <motion.div
+            variants={fadeUp}
+            custom={0}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 uppercase tracking-widest mb-4"
+          >
+            <Building2 className="w-4 h-4" />
+            Equipaments i Serveis
+          </motion.div>
+          <motion.h2
+            variants={fadeUp}
+            custom={1}
+            className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-6"
+          >
+            Les nostres instal&middot;lacions
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            custom={2}
+            className="text-gray-500 text-lg max-w-2xl mx-auto"
+          >
+            Espais moderns i ben equipats per garantir una formaci&oacute;
+            pr&agrave;ctica i de qualitat.
+          </motion.p>
+        </motion.div>
+
+        {/* Photo gallery */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={stagger}
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-16"
+        >
+          {galleryImages.map((img, i) => (
+            <motion.div
+              key={img.alt}
+              variants={scaleIn}
+              custom={i}
+              className="relative aspect-[4/3] rounded-2xl overflow-hidden group"
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <p className="absolute bottom-3 left-3 right-3 text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {img.alt}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Facility cards */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={stagger}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
+          {facilities.map((f, i) => {
+            const Icon = f.icon;
+            return (
+              <motion.div
+                key={f.title}
+                variants={fadeUp}
+                custom={i}
+                className="flex gap-4 p-6 rounded-2xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all duration-300"
+              >
+                <div className="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+                  <Icon className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-1">
+                    {f.title}
+                  </h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">
+                    {f.description}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-center mt-12"
+        >
+          <a
+            href="https://www.iespfq.cat/portal/el-centre/equipaments-i-serveis/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-900 transition-colors"
+          >
+            M&eacute;s sobre equipaments i serveis
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════
+   VALUES
+   ═══════════════════════════════════════════════════════ */
 function Values() {
   const values = [
     {
@@ -428,7 +904,7 @@ function Values() {
       icon: Globe,
       title: "Innovaci\u00f3",
       description:
-        "Incorporem noves metodologies i tecnologies per a un aprenentatge actiu i significatiu.",
+        "Incorporem noves metodologies i tecnologies per a un aprenentatge actiu.",
     },
     {
       icon: Users,
@@ -498,10 +974,14 @@ function Values() {
   );
 }
 
+/* ═══════════════════════════════════════════════════════
+   CTA + AMPA
+   ═══════════════════════════════════════════════════════ */
 function CTA() {
   return (
     <section className="py-32 bg-gray-50/50">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6 space-y-8">
+        {/* Main CTA */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -551,17 +1031,56 @@ function CTA() {
             </motion.div>
           </div>
         </motion.div>
+
+        {/* AMPA card */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="rounded-2xl bg-white border border-gray-100 p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-6"
+        >
+          <div className="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center shrink-0">
+            <Users className="w-7 h-7 text-amber-600" />
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <h3 className="text-lg font-semibold text-gray-900 mb-1">
+              AMPA Pius Font i Quer
+            </h3>
+            <p className="text-gray-500 text-sm leading-relaxed">
+              L&apos;Associaci&oacute; de Mares i Pares d&apos;Alumnes
+              col&middot;labora activament amb el centre per millorar
+              l&apos;experi&egrave;ncia educativa, organitzar activitats i
+              representar les fam&iacute;lies.
+            </p>
+          </div>
+          <a
+            href="https://sites.google.com/site/ampapiusfontiquer/home"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-amber-50 text-amber-700 text-sm font-medium hover:bg-amber-100 transition-colors"
+          >
+            Web AMPA
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );
 }
 
+/* ═══════════════════════════════════════════════════════
+   LOCATION (On som)
+   ═══════════════════════════════════════════════════════ */
 function Contact() {
   const info = [
     {
       icon: MapPin,
       title: "Adre\u00e7a",
-      lines: ["Avinguda de les Bases de Manresa, 3", "08242 Manresa, Barcelona"],
+      lines: [
+        "Avinguda de les Bases de Manresa, 3",
+        "08242 Manresa, Barcelona",
+      ],
     },
     {
       icon: Phone,
@@ -576,7 +1095,7 @@ function Contact() {
     {
       icon: Clock,
       title: "Horari",
-      lines: ["Dilluns a Divendres", "8:00 - 21:00"],
+      lines: ["Dilluns a Divendres", "8:00 \u2013 21:00"],
     },
   ];
 
@@ -590,13 +1109,14 @@ function Contact() {
           variants={stagger}
           className="text-center mb-16"
         >
-          <motion.p
+          <motion.div
             variants={fadeUp}
             custom={0}
-            className="text-sm font-semibold text-blue-700 uppercase tracking-widest mb-4"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 uppercase tracking-widest mb-4"
           >
-            Contacte
-          </motion.p>
+            <MapPin className="w-4 h-4" />
+            On som
+          </motion.div>
           <motion.h2
             variants={fadeUp}
             custom={1}
@@ -609,7 +1129,9 @@ function Contact() {
             custom={2}
             className="text-gray-500 text-lg max-w-2xl mx-auto"
           >
-            Estem al cor de Manresa, ben comunicats i amb les portes obertes.
+            Ens trobar&agrave;s al barri de la Font dels Capellans, ben comunicat
+            amb transport p&uacute;blic i amb f&agrave;cil acc&eacute;s des de
+            qualsevol punt de Manresa i rodalies.
           </motion.p>
         </motion.div>
 
@@ -663,11 +1185,32 @@ function Contact() {
             title="Mapa IES Pius Font i Quer"
           />
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-center mt-8"
+        >
+          <a
+            href="https://www.iespfq.cat/portal/el-centre/on-som/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-900 transition-colors"
+          >
+            Com arribar-hi
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );
 }
 
+/* ═══════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════ */
 function Footer() {
   return (
     <footer className="py-12 bg-gray-50 border-t border-gray-100">
@@ -681,7 +1224,7 @@ function Footer() {
               IES Pius Font i Quer &mdash; Manresa
             </span>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             <a
               href="https://www.iespfq.cat/portal/"
               target="_blank"
@@ -690,7 +1233,23 @@ function Footer() {
             >
               Portal Oficial
             </a>
-            <span className="text-sm text-gray-300">|</span>
+            <a
+              href="https://www.iespfq.cat/portal/el-centre/un-xic-dhistoria/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-gray-400 hover:text-gray-700 transition-colors"
+            >
+              Hist&ograve;ria
+            </a>
+            <a
+              href="https://sites.google.com/site/ampapiusfontiquer/home"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-gray-400 hover:text-gray-700 transition-colors"
+            >
+              AMPA
+            </a>
+            <span className="text-sm text-gray-300 hidden sm:inline">|</span>
             <span className="text-sm text-gray-400">
               &copy; {new Date().getFullYear()} Tots els drets reservats
             </span>
@@ -701,13 +1260,18 @@ function Footer() {
   );
 }
 
+/* ═══════════════════════════════════════════════════════
+   PAGE
+   ═══════════════════════════════════════════════════════ */
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
       <Hero />
-      <About />
+      <HistorySection />
+      <PiusBio />
       <Programs />
+      <Facilities />
       <Values />
       <CTA />
       <Contact />
