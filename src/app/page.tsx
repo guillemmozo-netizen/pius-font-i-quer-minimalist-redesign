@@ -1059,21 +1059,26 @@ function CTA() {
     <section className="py-32 bg-section-alt relative">
       <div className="max-w-6xl mx-auto px-6 space-y-8">
         {/* Main CTA */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={stagger}
-          className="relative rounded-3xl bg-gradient-to-br from-blue-800 via-indigo-800 to-purple-800 p-12 sm:p-16 text-center overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(139,92,246,0.2),transparent_50%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.15),transparent_50%)]" />
-          {/* Animated glow */}
           <motion.div
-            className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"
-            animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          />
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={stagger}
+            className="relative rounded-3xl bg-gradient-to-br from-blue-800 via-indigo-800 to-purple-800 p-12 sm:p-16 text-center overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(139,92,246,0.2),transparent_50%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.15),transparent_50%)]" />
+            {/* Animated glows */}
+            <motion.div
+              className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"
+              animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3], x: [0, 20, 0], y: [0, -20, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div
+              className="absolute bottom-0 left-0 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"
+              animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.5, 0.2] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            />
 
           <div className="relative z-10">
             <motion.h2
