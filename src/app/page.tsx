@@ -343,7 +343,7 @@ function HistorySection() {
       text: "Es crea l\u2019Institut de Formaci\u00f3 Professional al barri de la Font dels Capellans de Manresa, per donar resposta a la creixent demanda educativa de la comarca del Bages.",
     },
     {
-      year: "1980s",
+      year: "1980",
       title: "Consolidaci\u00f3 i creixement",
       text: "El centre es consolida amb noves especialitats de Formaci\u00f3 Professional i amplia la seva oferta formativa, convertint-se en un referent educatiu a la ciutat.",
     },
