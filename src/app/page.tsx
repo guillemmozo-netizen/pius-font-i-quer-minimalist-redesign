@@ -409,16 +409,16 @@ function HistorySection() {
           {/* Center line */}
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-blue-200 via-indigo-200 to-purple-200 md:-translate-x-px" />
 
-          <div className="space-y-12">
-            {timeline.map((item, i) => (
-              <motion.div
-                key={item.year}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={fadeUp}
-                custom={0}
-                className={`relative flex flex-col md:flex-row gap-8 md:gap-16 ${
+            <div className="space-y-6">
+              {timeline.map((item, i) => (
+                <motion.div
+                  key={item.year}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                  variants={fadeUp}
+                  custom={0}
+                  className={`relative flex flex-col md:flex-row gap-4 md:gap-12 ${
                   i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
               >
