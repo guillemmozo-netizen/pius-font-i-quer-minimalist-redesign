@@ -108,8 +108,9 @@ function Navbar() {
     { label: "Història", href: "#historia" },
     { label: "Pius Font i Quer", href: "#piusfontquer" },
     { label: "Estudis", href: "#estudis" },
-    { label: "Instal·lacions", href: "#installacions" },
-    { label: "Contacte", href: "#contacte" },
+      { label: "Instal·lacions", href: "#installacions" },
+      { label: "Xarxes", href: "#xarxes" },
+      { label: "Contacte", href: "#contacte" },
   ];
 
   return (
