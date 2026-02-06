@@ -216,7 +216,7 @@ function Navbar({ activeView, onNavigate }: { activeView: ViewType; onNavigate: 
 /* ═══════════════════════════════════════════════════════
    HERO
    ═══════════════════════════════════════════════════════ */
-function Hero() {
+function Hero({ onNavigate }: { onNavigate: (view: ViewType) => void }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
