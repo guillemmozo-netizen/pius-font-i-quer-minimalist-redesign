@@ -182,18 +182,19 @@ function Hero() {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background image */}
-      <div className="absolute inset-0">
-        <Image
-          src={IMAGES.hero}
-          alt="Pius Font i Quer"
-          fill
-          className="object-cover object-top"
-          priority
-        />
-        {/* Blue → Purple gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-800/85 via-indigo-700/75 to-purple-700/85" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#fafbff] via-transparent to-transparent" />
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src={IMAGES.hero}
+            alt="Pius Font i Quer"
+            fill
+            className="object-contain object-center"
+            sizes="100vw"
+            priority
+          />
+          {/* Blue → Purple gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-800/70 via-indigo-700/55 to-purple-700/65" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#fafbff] via-transparent to-transparent" />
       </div>
 
       {/* Decorative animated orbs */}
