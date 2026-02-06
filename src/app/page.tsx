@@ -1577,19 +1577,98 @@ function Footer() {
    PAGE
    ═══════════════════════════════════════════════════════ */
 export default function Home() {
+  const [activeView, setActiveView] = useState<ViewType>("home");
+
+  const handleNavigate = (view: ViewType) => {
+    setActiveView(view);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <HistorySection />
-      <PiusBio />
-      <Programs />
-      <Facilities />
-      <Values />
-        <CTA />
-        <Social />
-        <Contact />
-      <Footer />
+      <Navbar activeView={activeView} onNavigate={handleNavigate} />
+      <AnimatePresence mode="wait">
+        {activeView === "home" && (
+          <motion.div
+            key="home"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Hero onNavigate={handleNavigate} />
+            <Programs />
+            <Values />
+            <CTA />
+            <Footer />
+          </motion.div>
+        )}
+        {activeView === "historia" && (
+          <motion.div
+            key="historia"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="pt-16"
+          >
+            <HistorySection />
+            <Footer />
+          </motion.div>
+        )}
+        {activeView === "piusfontquer" && (
+          <motion.div
+            key="piusfontquer"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="pt-16"
+          >
+            <PiusBio />
+            <Footer />
+          </motion.div>
+        )}
+        {activeView === "installacions" && (
+          <motion.div
+            key="installacions"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="pt-16"
+          >
+            <Facilities />
+            <Footer />
+          </motion.div>
+        )}
+        {activeView === "xarxes" && (
+          <motion.div
+            key="xarxes"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="pt-16"
+          >
+            <Social />
+            <Footer />
+          </motion.div>
+        )}
+        {activeView === "contacte" && (
+          <motion.div
+            key="contacte"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="pt-16"
+          >
+            <Contact />
+            <Footer />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
