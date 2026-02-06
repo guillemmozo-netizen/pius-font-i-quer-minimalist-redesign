@@ -430,19 +430,19 @@ function HistorySection() {
 
                 {/* Content */}
                 <div
-                  className={`md:w-1/2 pl-12 md:pl-0 ${
-                    i % 2 === 0
-                      ? "md:pr-16 md:text-right"
-                      : "md:pl-16 md:text-left"
-                  }`}
-                >
-                  <span className="inline-block text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full mb-3">
-                    {item.year}
-                  </span>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-500 leading-relaxed">{item.text}</p>
+                    className={`md:w-1/2 pl-12 md:pl-0 ${
+                      i % 2 === 0
+                        ? "md:pr-12 md:text-right"
+                        : "md:pl-12 md:text-left"
+                    }`}
+                  >
+                    <span className="inline-block text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full mb-2">
+                      {item.year}
+                    </span>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">{item.text}</p>
                 </div>
 
                 {/* Spacer for the other side */}
