@@ -188,7 +188,7 @@ function Hero() {
             src={IMAGES.hero}
             alt="Pius Font i Quer"
             fill
-            className="object-contain object-center"
+            className="object-contain object-center scale-[1.15]"
             sizes="100vw"
             priority
           />
