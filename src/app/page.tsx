@@ -905,12 +905,14 @@ function Facilities() {
           {facilities.map((f, i) => {
             const Icon = f.icon;
             return (
-              <motion.div
-                key={f.title}
-                variants={fadeUp}
-                custom={i}
-                className="flex gap-4 p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition-all duration-300"
-              >
+                <motion.div
+                  key={f.title}
+                  variants={i % 2 === 0 ? fadeSlideLeft : fadeSlideRight}
+                  custom={i}
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="flex gap-4 p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition-colors duration-300"
+                >
                 <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center shrink-0">
                   <Icon className="w-5 h-5 text-indigo-600" />
                 </div>
