@@ -117,11 +117,11 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Subtle minimalist dot grid background */
+/* Subtle minimalist dot grid background with blue tint */
 body {
-  background-color: #fafbff;
+  background-color: #f0f4ff;
   background-image:
-    radial-gradient(circle at 1px 1px, rgba(99, 102, 241, 0.04) 1px, transparent 0);
+    radial-gradient(circle at 1px 1px, rgba(99, 102, 241, 0.06) 1px, transparent 0);
   background-size: 32px 32px;
 }
 
