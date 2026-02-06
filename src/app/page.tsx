@@ -421,8 +421,11 @@ function HistorySection() {
                   i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
               >
-                {/* Dot */}
-                <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full -translate-x-1.5 md:-translate-x-1.5 mt-2 ring-4 ring-white z-10" />
+                  {/* Dot */}
+                  <div className="absolute left-4 md:left-1/2 -translate-x-1.5 md:-translate-x-1.5 mt-2 z-10">
+                    <div className="w-3 h-3 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full ring-4 ring-white" />
+                    <div className="absolute inset-0 w-3 h-3 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full animate-ping opacity-30" />
+                  </div>
 
                 {/* Content */}
                 <div
