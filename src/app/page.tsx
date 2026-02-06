@@ -314,19 +314,19 @@ function Hero({ onNavigate }: { onNavigate: (view: ViewType) => void }) {
             transition={{ duration: 0.6, delay: 0.55 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-          <a
-            href="#estudis"
-            className="group flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-gray-900 font-medium hover:bg-gray-100 transition-all shadow-lg shadow-black/10"
-          >
-            Descobreix els Estudis
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
-          <a
-            href="#historia"
-            className="px-7 py-3.5 rounded-full border border-white/30 text-white font-medium hover:bg-white/10 transition-colors backdrop-blur-sm"
-          >
-            La nostra hist&ograve;ria
-          </a>
+            <a
+              href="#estudis"
+              className="group flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-gray-900 font-medium hover:bg-gray-100 transition-all shadow-lg shadow-black/10"
+            >
+              Descobreix els Estudis
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+            <button
+              onClick={() => onNavigate("historia")}
+              className="px-7 py-3.5 rounded-full border border-white/30 text-white font-medium hover:bg-white/10 transition-colors backdrop-blur-sm"
+            >
+              La nostra hist&ograve;ria
+            </button>
         </motion.div>
       </motion.div>
 
