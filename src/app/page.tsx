@@ -726,12 +726,14 @@ function Programs() {
           {programs.map((program, i) => {
             const Icon = program.icon;
             return (
-              <motion.div
-                key={program.title}
-                variants={fadeUp}
-                custom={i}
-                className="group p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-100 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-100/30 hover:bg-white transition-all duration-300 cursor-default"
-              >
+                <motion.div
+                  key={program.title}
+                  variants={fadeUp}
+                  custom={i}
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="group p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-100 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-100/30 hover:bg-white transition-colors duration-300 cursor-default"
+                >
                 <div
                   className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 transition-colors duration-300 ${colorMap[program.color]}`}
                 >
