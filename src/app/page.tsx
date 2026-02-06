@@ -560,39 +560,53 @@ function PiusBio() {
                   transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                 />
 
-              <div className="relative space-y-8">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-100 to-indigo-100 flex items-center justify-center">
-                  <Leaf className="w-8 h-8 text-emerald-600" />
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex items-baseline gap-3">
-                    <span className="text-4xl font-bold text-gray-900">1888</span>
-                    <span className="text-gray-400">&ndash;</span>
-                    <span className="text-4xl font-bold text-gray-900">1964</span>
+                <div className="relative flex gap-6">
+                  {/* Photo */}
+                  <div className="shrink-0 w-28 sm:w-36 rounded-2xl overflow-hidden shadow-md">
+                    <Image
+                      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/pfq2-1770414419410.jpg?width=8000&height=8000&resize=contain"
+                      alt="Pius Font i Quer"
+                      width={300}
+                      height={450}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <p className="text-sm text-gray-500 uppercase tracking-widest">
-                    Lleida &mdash; Barcelona
-                  </p>
-                </div>
 
-                <div className="space-y-3">
-                  {[
-                    "Catedràtic de Botànica (UB)",
-                    "Autor de Flora de Catalunya",
-                    "Herbari de +200.000 plecs",
-                    "Dioscórides renovado",
-                  ].map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-center gap-3 text-sm text-gray-600"
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-indigo-500 shrink-0" />
-                      {item}
+                  {/* Info */}
+                  <div className="space-y-8 flex-1">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-100 to-indigo-100 flex items-center justify-center">
+                    <Leaf className="w-8 h-8 text-emerald-600" />
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-baseline gap-3">
+                      <span className="text-4xl font-bold text-gray-900">1888</span>
+                      <span className="text-gray-400">&ndash;</span>
+                      <span className="text-4xl font-bold text-gray-900">1964</span>
                     </div>
-                  ))}
+                    <p className="text-sm text-gray-500 uppercase tracking-widest">
+                      Lleida &mdash; Barcelona
+                    </p>
                   </div>
-                </div>
+
+                  <div className="space-y-3">
+                    {[
+                      "Catedràtic de Botànica (UB)",
+                      "Autor de Flora de Catalunya",
+                      "Herbari de +200.000 plecs",
+                      "Dioscórides renovado",
+                    ].map((item) => (
+                      <div
+                        key={item}
+                        className="flex items-center gap-3 text-sm text-gray-600"
+                      >
+                        <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-indigo-500 shrink-0" />
+                        {item}
+                      </div>
+                    ))}
+                    </div>
+                  </div>
+                  </div>
               </motion.div>
             </motion.div>
         </motion.div>
