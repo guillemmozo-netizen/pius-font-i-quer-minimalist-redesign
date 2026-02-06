@@ -127,10 +127,10 @@ body {
 
 /* Alternate section subtle mesh */
 .bg-section-alt {
-  background-color: rgba(248, 247, 255, 0.6);
+  background-color: rgba(235, 240, 255, 0.6);
   background-image:
-    radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+    radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(139, 92, 246, 0.04) 0%, transparent 50%);
 }
 
 /* Geometric accent lines for sections */
