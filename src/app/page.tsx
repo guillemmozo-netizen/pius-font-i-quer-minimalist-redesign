@@ -353,7 +353,7 @@ function HistorySection() {
       text: "Amb la reforma educativa (LOGSE), el centre es transforma en Institut d\u2019Educaci\u00f3 Secund\u00e0ria i adopta el nom del il\u00b7lustre bot\u00e0nic Pius Font i Quer, fill de Lleida i vinculat a la ci\u00e8ncia catalana.",
     },
     {
-      year: "2000s",
+      year: "2000",
       title: "Modernitzaci\u00f3",
       text: "S\u2019incorporen els Cicles Formatius de Grau Mitj\u00e0 i Superior en fam\u00edlies com Inform\u00e0tica, Administraci\u00f3 i Sanitat, i es renoven les instal\u00b7lacions amb laboratoris i aules d\u2019inform\u00e0tica actualitzades.",
     },
