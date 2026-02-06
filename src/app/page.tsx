@@ -545,14 +545,26 @@ function PiusBio() {
           </div>
 
           {/* Right: decorative card */}
-          <motion.div
-            variants={scaleIn}
-            custom={2}
-            className="relative"
-          >
-            <div className="relative rounded-3xl bg-gradient-to-br from-emerald-50 via-white to-indigo-50 border border-gray-100 p-10 sm:p-14 shadow-sm">
-              <div className="absolute top-6 right-6 w-20 h-20 bg-emerald-100/50 rounded-full blur-2xl" />
-              <div className="absolute bottom-6 left-6 w-24 h-24 bg-purple-100/50 rounded-full blur-2xl" />
+            <motion.div
+              variants={scaleIn}
+              custom={2}
+              className="relative"
+            >
+              <motion.div
+                whileHover={{ y: -6, rotate: 1 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                className="relative rounded-3xl bg-gradient-to-br from-emerald-50 via-white to-indigo-50 border border-gray-100 p-10 sm:p-14 shadow-sm"
+              >
+                <motion.div
+                  className="absolute top-6 right-6 w-20 h-20 bg-emerald-100/50 rounded-full blur-2xl"
+                  animate={{ scale: [1, 1.3, 1] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <motion.div
+                  className="absolute bottom-6 left-6 w-24 h-24 bg-purple-100/50 rounded-full blur-2xl"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                />
 
               <div className="relative space-y-8">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-100 to-indigo-100 flex items-center justify-center">
