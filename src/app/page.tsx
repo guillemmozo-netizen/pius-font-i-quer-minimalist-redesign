@@ -32,7 +32,7 @@ import {
   Award,
   Microscope,
   BriefcaseBusiness,
-  Home,
+  Home as HomeIcon,
 } from "lucide-react";
 import Image from "next/image";
 
