@@ -1002,23 +1002,6 @@ function Facilities() {
             </motion.div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-center mt-12"
-          >
-            <a
-              href="https://www.iespfq.cat/portal/el-centre/equipaments-i-serveis/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-indigo-700 hover:text-purple-700 transition-colors"
-            >
-              M&eacute;s sobre equipaments i serveis
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-          </motion.div>
       </div>
     </section>
   );
