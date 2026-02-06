@@ -535,17 +535,7 @@ function PiusBio() {
               . El nostre institut porta el seu nom en homenatge al seu
               llegat cient&iacute;fic i a la seva passió pel coneixement.
             </motion.p>
-            <motion.a
-              variants={fadeUp}
-              custom={5}
-              href="https://www.iespfq.cat/portal/el-centre/qui-va-ser-pius-font-i-quer/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-indigo-700 hover:text-purple-700 transition-colors"
-            >
-              M&eacute;s informaci&oacute;
-              <ExternalLink className="w-3.5 h-3.5" />
-            </motion.a>
+
           </div>
 
           {/* Right: decorative card */}
