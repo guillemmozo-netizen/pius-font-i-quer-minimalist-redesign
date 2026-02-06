@@ -561,16 +561,24 @@ function PiusBio() {
                 />
 
                 <div className="relative flex gap-6">
-                  {/* Photo */}
-                  <div className="shrink-0 w-40 sm:w-52 rounded-2xl overflow-hidden shadow-md">
-                    <Image
-                      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/pfq2-1770414419410.jpg?width=8000&height=8000&resize=contain"
-                      alt="Pius Font i Quer"
-                      width={300}
-                      height={450}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                    {/* Photo */}
+                    <div
+                      className="shrink-0 w-40 sm:w-52 rounded-2xl overflow-hidden shadow-md"
+                      style={{
+                        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 6px, black calc(100% - 6px), transparent 100%), linear-gradient(to bottom, transparent 0%, black 6px, black calc(100% - 6px), transparent 100%)",
+                        WebkitMaskComposite: "destination-in",
+                        maskImage: "linear-gradient(to right, transparent 0%, black 6px, black calc(100% - 6px), transparent 100%), linear-gradient(to bottom, transparent 0%, black 6px, black calc(100% - 6px), transparent 100%)",
+                        maskComposite: "intersect",
+                      }}
+                    >
+                      <Image
+                        src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/pfq2-1770414419410.jpg?width=8000&height=8000&resize=contain"
+                        alt="Pius Font i Quer"
+                        width={300}
+                        height={450}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
 
                   {/* Info */}
                   <div className="space-y-8 flex-1">
