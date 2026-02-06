@@ -476,7 +476,7 @@ function HistorySection() {
    ═══════════════════════════════════════════════════════ */
 function PiusBio() {
   return (
-    <section id="piusfontquer" className="py-32 bg-section-alt relative">
+    <section id="piusfontquer" className="py-32 bg-geo-lines relative">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
