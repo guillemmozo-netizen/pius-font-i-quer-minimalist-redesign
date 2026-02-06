@@ -103,15 +103,16 @@ const IMAGES = {
 /* ═══════════════════════════════════════════════════════
    NAVBAR
    ═══════════════════════════════════════════════════════ */
-function Navbar() {
+type ViewType = "home" | "historia" | "piusfontquer" | "installacions" | "xarxes" | "contacte";
+
+function Navbar({ activeView, onNavigate }: { activeView: ViewType; onNavigate: (view: ViewType) => void }) {
   const [open, setOpen] = useState(false);
-  const links = [
-    { label: "Història", href: "#historia" },
-    { label: "Pius Font i Quer", href: "#piusfontquer" },
-    { label: "Estudis", href: "#estudis" },
-      { label: "Instal·lacions", href: "#installacions" },
-      { label: "Xarxes", href: "#xarxes" },
-      { label: "Contacte", href: "#contacte" },
+  const links: { label: string; view: ViewType }[] = [
+    { label: "Història", view: "historia" },
+    { label: "Pius Font i Quer", view: "piusfontquer" },
+    { label: "Instal·lacions", view: "installacions" },
+    { label: "Xarxes", view: "xarxes" },
+    { label: "Contacte", view: "contacte" },
   ];
 
   return (
@@ -122,25 +123,32 @@ function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/70 border-b border-indigo-100/50"
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-3">
+        <button onClick={() => onNavigate("home")} className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-700 to-purple-600 flex items-center justify-center">
             <span className="text-white font-bold text-sm">PFQ</span>
           </div>
           <span className="font-semibold text-gray-900 hidden sm:block">
             IES Pius Font i Quer
           </span>
-        </a>
+        </button>
 
         {/* Desktop */}
         <div className="hidden lg:flex items-center gap-7">
+          <button
+            onClick={() => onNavigate("home")}
+            className={`p-2 rounded-lg transition-colors ${activeView === "home" ? "text-indigo-700 bg-indigo-50" : "text-gray-500 hover:text-indigo-700"}`}
+            aria-label="Inici"
+          >
+            <HomeIcon className="w-5 h-5" />
+          </button>
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm text-gray-500 hover:text-indigo-700 transition-colors"
+            <button
+              key={l.view}
+              onClick={() => onNavigate(l.view)}
+              className={`text-sm transition-colors ${activeView === l.view ? "text-indigo-700 font-semibold" : "text-gray-500 hover:text-indigo-700"}`}
             >
               {l.label}
-            </a>
+            </button>
           ))}
           <a
             href="https://www.iespfq.cat/portal/"
@@ -173,15 +181,21 @@ function Navbar() {
             className="lg:hidden overflow-hidden bg-white/95 backdrop-blur-xl border-t border-indigo-100/50"
           >
             <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-3">
+              <button
+                onClick={() => { onNavigate("home"); setOpen(false); }}
+                className={`flex items-center gap-2 text-sm py-2 ${activeView === "home" ? "text-indigo-700 font-semibold" : "text-gray-600"}`}
+              >
+                <HomeIcon className="w-4 h-4" />
+                Inici
+              </button>
               {links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="text-sm text-gray-600 py-2"
+                <button
+                  key={l.view}
+                  onClick={() => { onNavigate(l.view); setOpen(false); }}
+                  className={`text-sm text-left py-2 ${activeView === l.view ? "text-indigo-700 font-semibold" : "text-gray-600"}`}
                 >
                   {l.label}
-                </a>
+                </button>
               ))}
               <a
                 href="https://www.iespfq.cat/portal/"
