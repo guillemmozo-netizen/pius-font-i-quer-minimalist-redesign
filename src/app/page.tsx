@@ -214,7 +214,7 @@ function Hero() {
 
       <motion.div
         style={{ opacity }}
-        className="relative z-10 max-w-4xl mx-auto px-6 text-center"
+        className="relative z-10 max-w-4xl mx-auto px-6 text-center -mt-12"
       >
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
