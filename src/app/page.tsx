@@ -230,7 +230,7 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="text-5xl sm:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6 drop-shadow-lg"
+          className="text-6xl sm:text-8xl font-bold text-white tracking-tight leading-[1.1] mb-6 drop-shadow-lg"
         >
           Pius Font
           <br />
