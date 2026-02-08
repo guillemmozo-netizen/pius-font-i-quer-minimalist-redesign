@@ -1,4 +1,6 @@
+
 "use client";
+
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
@@ -94,11 +96,11 @@ const rotateIn = {
 
 /* ─── images ─── */
 const IMAGES = {
-  hero: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/Diseno-sin-titulo_Nero_AI_Image_Upscaler_Photo-resized-1770408139233.webp?width=8000&height=8000&resize=contain",
-  patio: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170217_141444-xs-1770405520006.jpg?width=8000&height=8000&resize=contain",
-  pingpong: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170421_130826-xs-1770405519854.jpg?width=8000&height=8000&resize=contain",
-  corridor1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170912_170647-xs-1770405519842.jpg?width=8000&height=8000&resize=contain",
-  corridor2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170912_170920-xs-1770405519840.jpg?width=8000&height=8000&resize=contain",
+  hero: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/Diseno-sin-titulo_Nero_AI_Image_Upscaler_Photo-resized-1770408139233.webp?width=3840&height=2160&resize=contain",
+  patio: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170217_141444-xs-1770405520006.jpg?width=432&height=243&resize=contain",
+  pingpong: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170421_130826-xs-1770405519854.jpg?width=432&height=243&resize=contain",
+  corridor1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170912_170647-xs-1770405519842.jpg?width=432&height=243&resize=contain",
+  corridor2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/20170912_170920-xs-1770405519840.jpg?width=432&height=243&resize=contain",
 };
 
 /* ═══════════════════════════════════════════════════════
@@ -583,7 +585,7 @@ function PiusBio() {
                       }}
                     >
                       <Image
-                        src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/pfq2-1770414419410.jpg?width=8000&height=8000&resize=contain"
+                        src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/a1ccb738-14b3-4dc3-ae1d-ef01e48c7f15/pfq2-1770414419410.jpg?width=190&height=300&resize=contain"
                         alt="Pius Font i Quer"
                         width={300}
                         height={450}
@@ -681,7 +683,7 @@ function Programs() {
     },
     {
       icon: FlaskConical,
-      title: "Sanitat i Laboratori",
+      title: "Sanitat",
       subtitle: "CFGM Cures d\u2019Auxiliar d\u2019Infermeria",
       description:
         "Formaci\u00f3 en l\u2019\u00e0mbit sanitari: cures b\u00e0siques d\u2019infermeria, higi\u00e8ne, alimentaci\u00f3 i atenci\u00f3 al pacient. Pr\u00e0ctiques en centres sanitaris.",
