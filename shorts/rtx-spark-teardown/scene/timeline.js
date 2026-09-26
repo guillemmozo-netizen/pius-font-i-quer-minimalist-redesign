@@ -281,8 +281,15 @@ export class Timeline {
     // ---- chasis / puertos
     parts.ports.forEach((m, i) => (m.opacity = win(t, 39.2 + i * 0.1, 41.8, 0.2, 0.4)));
     const sw = seg(t, 38.6, 41.2);
-    this.x.sweepLight.intensity = 60 * win(t, 38.6, 41.2, 0.3, 0.4);
-    this.x.sweepLight.position.set(lerp(-3.2, 3.2, easeInOutCubic(sw)), -1.1, 1.2);
+    if (t < 20) {
+      // gancho: reflejo que recorre el canto del portátil cerrado
+      const hs = seg(t, 0.1, 2.6);
+      this.x.sweepLight.intensity = 25 * win(t, 0.1, 2.6, 0.4, 0.5);
+      this.x.sweepLight.position.set(lerp(-2.6, 1.2, easeInOutCubic(hs)), 0.35, 1.9);
+    } else {
+      this.x.sweepLight.intensity = 60 * win(t, 38.6, 41.2, 0.3, 0.4);
+      this.x.sweepLight.position.set(lerp(-3.2, 3.2, easeInOutCubic(sw)), -1.1, 1.2);
+    }
 
     // ---- juntas brillando antes de abrir
     const seam = win(t, 2.9, 4.08, 0.9, 0.05) * (0.7 + 0.3 * Math.sin(t * 60));
