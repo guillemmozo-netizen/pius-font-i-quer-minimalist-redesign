@@ -1,0 +1,5 @@
+node_modules/
+build/
+out/*.mp4
+tts/wav/_voice_reference.wav
+__pycache__/
