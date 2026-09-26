@@ -102,7 +102,7 @@ function makeEnv(renderer) {
   };
   panel(10, 5, 0xffffff, 4.5, [0, 10, 1]);
   panel(1.4, 12, 0xffffff, 3.2, [-10, 2, 5]);
-  panel(1.2, 12, 0x76b900, 0.7, [10, 1, -4]);
+  panel(1.2, 12, 0x76b900, 0.45, [10, 1, -4]);
   panel(8, 1.2, 0xcfe0ff, 1.6, [0, 1.5, -10]);
   panel(12, 1.8, 0xffffff, 2.6, [2, -2, 10]);
   const pm = new THREE.PMREMGenerator(renderer);
@@ -235,7 +235,7 @@ async function init() {
   scene.add(target);
   key.target = target;
   const rimG = new THREE.DirectionalLight(new THREE.Color(0.45, 1.0, 0.1), 1.1);
-  rimG.position.set(-7, 3, -6);
+  rimG.position.set(-7, 0.3, -6);
   scene.add(rimG);
   const rimC = new THREE.DirectionalLight(new THREE.Color(0.7, 0.85, 1.0), 1.4);
   rimC.position.set(7, 2.5, -5);

@@ -31,8 +31,8 @@ const CAM_KEYS = [
   K(34.8, [0, 2.32, -0.56], 24, 24, 3.1, 34),
   K(36.0, [0, 0.78, 0.55], 18, 50, 9.2, 32),
   K(38.0, [0, 0.78, 0.55], -6, 46, 8.8, 32),
-  K(39.3, [0, 0.0, 0.1], 30, -16, 9.6, 30),
-  K(42.2, [0, 0.0, 0.1], -18, -10, 9.8, 30),
+  K(39.3, [-0.7, 0.04, 0.55], -56, 7, 5.6, 30),
+  K(42.2, [0.2, 0.04, 0.35], -30, 12, 6.8, 30),
   K(43.6, [0, 3.0, 0], 20, 18, 17.8, 30, { stop: true, ease: 'inOut' }),
   K(47.3, [0, 0.3, -0.2], 380, 24, 13.0, 32, { stop: true }),
   K(48.8, [0, 0.95, -0.55], 385, 12, 14.0, 32),
@@ -287,8 +287,8 @@ export class Timeline {
       this.x.sweepLight.intensity = 25 * win(t, 0.1, 2.6, 0.4, 0.5);
       this.x.sweepLight.position.set(lerp(-2.6, 1.2, easeInOutCubic(hs)), 0.35, 1.9);
     } else {
-      this.x.sweepLight.intensity = 60 * win(t, 38.6, 41.2, 0.3, 0.4);
-      this.x.sweepLight.position.set(lerp(-3.2, 3.2, easeInOutCubic(sw)), -1.1, 1.2);
+      this.x.sweepLight.intensity = 30 * win(t, 38.6, 41.2, 0.3, 0.4);
+      this.x.sweepLight.position.set(lerp(-3.4, 2.4, easeInOutCubic(sw)), 0.45, 2.1);
     }
 
     // ---- juntas brillando antes de abrir
@@ -320,8 +320,8 @@ export class Timeline {
     let flash = 0;
     let bloomK = 0;
     const fl2 = (a, amp2, k = 6) => (t >= a ? amp2 * Math.exp(-(t - a) * k) : 0);
-    flash += fl2(c.explode, 0.32, 9) + fl2(48.6, 0.35, 7) + fl2(31.0, 0.3, 8) + fl2(56.3, 0.15, 8);
-    for (const s of slams) flash += fl2(s, 0.12, 12);
+    flash += fl2(c.explode, 0.2, 14) + fl2(48.6, 0.18, 12) + fl2(31.0, 0.14, 14) + fl2(56.3, 0.1, 12);
+    for (const s of slams) flash += fl2(s, 0.07, 16);
     bloomK += fl2(c.explode, 0.8, 4) + fl2(31.0, 0.6, 3) + fl2(48.6, 0.5, 3);
     P.uFlash.value = clamp01(flash);
     P.uFlashColor.value.setRGB(0.86, 1.0, 0.8);

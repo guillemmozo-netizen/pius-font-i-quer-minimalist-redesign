@@ -238,7 +238,7 @@ void main(){
   float inner = step(0.5, fract((f.x+f.y*0.5)*6.0));
   float flick = 0.8 + 0.2*sin(uTime*30.0 + idx*3.1);
   vec3 col = vec3(0.18,0.62,0.0) * (0.8 + 0.4*inner) * box * on * flick * 2.6;
-  col += vec3(0.18,0.62,0.0) * uPulse * box * 1.5;
+  col += vec3(0.18,0.62,0.0) * uPulse * box * 1.5 * (0.15 + 0.85*on);
   gl_FragColor = vec4(col * uDim, 1.0);
 }`;
 
@@ -265,7 +265,7 @@ void main(){
     box = smoothstep(0.0,0.12,f.x)*smoothstep(1.0,0.88,f.x)*smoothstep(0.0,0.12,f.y)*smoothstep(1.0,0.88,f.y);
     on = cellOn(10.0 + c.y*5.0 + c.x, uLit);
   }
-  col = vec3(0.85,0.95,1.0) * box * on * 2.2 + vec3(0.18,0.62,0.0)*box*uPulse*1.2;
+  col = vec3(0.85,0.95,1.0) * box * on * 2.2 + vec3(0.18,0.62,0.0)*box*uPulse*1.2*(0.15 + 0.85*on);
   gl_FragColor = vec4(col * uDim, 1.0);
 }`;
 
