@@ -25,6 +25,7 @@ python tts/qwen3_tts.py                    # voz con Qwen3-TTS (requiere hugging
 python audio/build_audio.py                # -> build/mix.wav + build/captions.json (tiempos de subtítulos)
 node render/render.mjs --fps 60 --jobs 2   # -> build/video_rgb.mkv (sin pérdida)
 render/encode.sh                           # -> out/rtx-spark-short-1080x1920-60fps.mp4
+render/encode_share.sh                     # -> out/rtx-spark-short-share.mp4 (< 30 MB para mensajería)
 ```
 
 Revisión rápida: `node render/still.mjs 4.5 18 32 --scale 0.5` (fotogramas sueltos en `build/stills`) o una preview completa con `node render/render.mjs --fps 30 --scale 0.5 --out build/preview_rgb.mkv`.
