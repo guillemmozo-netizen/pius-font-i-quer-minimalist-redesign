@@ -16,6 +16,8 @@ export const D = 2.48;
 const HW = W / 2;
 const HD = D / 2;
 export const HINGE_Y = 0.118;
+export const SCREEN_Y = 0.0075; // plano emisivo de la pantalla (cristal en 0.006)
+export const TANDEM_Y = 0.009; // segunda capa OLED, por encima de SCREEN_Y
 
 // separación vertical de cada capa en la vista explosionada
 export const LAYERS = {
@@ -555,23 +557,23 @@ export function buildLaptop() {
       grp.add(mesh(chamferBox(w + 0.012, 0.004, d + 0.012, 0.0015), underfill, 0, -0.006, 0));
       grp.add(mesh(chamferBox(w, 0.012, d, 0.0008), dieBody, 0, 0, 0));
       const dm = L.reg(new THREE.MeshPhysicalMaterial({ map: tex, metalness: 0.55, roughness: 0.14, iridescence: 0.75, iridescenceIOR: 1.8, iridescenceThicknessRange: [240, 640], clearcoat: 1, clearcoatRoughness: 0.03 }));
-      const plane = mesh(overlay.geometry, dm, 0, 0.0061, 0);
+      const plane = mesh(overlay.geometry, Object.assign(dm, { polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 }), 0, 0.0068, 0);
       plane.rotation.copy(overlay.rotation);
       plane.scale.copy(overlay.scale);
       grp.add(noShadow(plane));
       return grp;
     };
-    const gpuFx = shaderMat(GPU_FS, { uLit: { value: 0 }, uPulse: { value: 0 } }, true);
+    const gpuFx = Object.assign(shaderMat(GPU_FS, { uLit: { value: 0 }, uPulse: { value: 0 } }, true), { polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3 });
     L.glows.push(gpuFx);
-    const gp = mesh(new THREE.PlaneGeometry(0.33, 0.31), gpuFx, 0, 0.0063, 0);
+    const gp = mesh(new THREE.PlaneGeometry(0.33, 0.31), gpuFx, 0, 0.0078, 0);
     gp.rotation.x = -Math.PI / 2;
     const gpuDie = mkDie(0.36, 0.34, gpuDieTexture(1024), gp);
     gpuDie.position.set(-0.1, 0.022, 0);
     gpuDie.add(noShadow(gp));
     soc.add(gpuDie);
-    const cpuFx = shaderMat(CPU_FS, { uLit: { value: 0 }, uPulse: { value: 0 } }, true);
+    const cpuFx = Object.assign(shaderMat(CPU_FS, { uLit: { value: 0 }, uPulse: { value: 0 } }, true), { polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3 });
     L.glows.push(cpuFx);
-    const cp = mesh(new THREE.PlaneGeometry(0.15, 0.28), cpuFx, 0, 0.0063, 0);
+    const cp = mesh(new THREE.PlaneGeometry(0.15, 0.28), cpuFx, 0, 0.0078, 0);
     cp.rotation.x = -Math.PI / 2;
     cp.rotation.z = Math.PI / 2;
     cp.scale.set(0.28 / 0.15, 0.15 / 0.28, 1);
@@ -1072,22 +1074,25 @@ export function buildLaptop() {
     const body = new THREE.Mesh(pGeo, [backM, glass]);
     body.castShadow = body.receiveShadow = true;
     panel.add(body);
-    const scr = shaderMat(SCREEN_FS, { uPower: { value: 0 }, uDemo: { value: 0 } });
+    // Los planos emisivos van separados del cristal (cara superior en y = 0.006) y con
+    // polygonOffset: a 0.0002 de distancia el depth buffer los mezclaba (z-fighting).
+    const lift = (m, f) => Object.assign(m, { polygonOffset: true, polygonOffsetFactor: f, polygonOffsetUnits: f });
+    const scr = lift(shaderMat(SCREEN_FS, { uPower: { value: 0 }, uDemo: { value: 0 } }), -2);
     L.glows.push(scr);
-    const screen = mesh(new THREE.PlaneGeometry(3.42, 2.14), scr, 0, 0.0062, 0.1);
+    const screen = mesh(new THREE.PlaneGeometry(3.42, 2.14), scr, 0, SCREEN_Y, 0.1);
     screen.rotation.x = -Math.PI / 2;
     screen.visible = false;
     panel.add(noShadow(screen));
-    const tandem = shaderMat(SCREEN_FS, { uPower: { value: 0 }, uDemo: { value: 1 } }, true);
+    const tandem = lift(shaderMat(SCREEN_FS, { uPower: { value: 0 }, uDemo: { value: 1 } }, true), -4);
     L.glows.push(tandem);
-    const t2 = mesh(new THREE.PlaneGeometry(3.42, 2.14), tandem, 0, 0.0063, 0.1);
+    const t2 = mesh(new THREE.PlaneGeometry(3.42, 2.14), tandem, 0, TANDEM_Y, 0.1);
     t2.rotation.x = -Math.PI / 2;
     t2.visible = false;
     panel.add(noShadow(t2));
     // cámara (en el marco superior)
     const lens = L.mat('lens', { color: 0x07080c, metalness: 0.9, roughness: 0.05, iridescence: 1, iridescenceIOR: 2.0, iridescenceThicknessRange: [300, 700], clearcoat: 1 });
     const camG = new THREE.Group();
-    camG.position.set(0, 0.0062, 1.19);
+    camG.position.set(0, 0.0068, 1.19);
     camG.add(mesh(new THREE.CircleGeometry(0.0055, 32).rotateX(-Math.PI / 2), lens));
     camG.add(mesh(new THREE.RingGeometry(0.0058, 0.0085, 32).rotateX(-Math.PI / 2), L.mat('camRing', { color: 0x1a1b1e, metalness: 0.8, roughness: 0.25 })));
     camG.add(mesh(new THREE.CircleGeometry(0.0022, 16).rotateX(-Math.PI / 2), L.mat('irLed', { color: 0x200606, roughness: 0.2 }), 0.03, 0, 0));

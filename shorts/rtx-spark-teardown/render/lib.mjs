@@ -23,6 +23,11 @@ export function serve(port = 0) {
   });
 }
 
+// Modo GPU (tarjeta gráfica real, p. ej. una RTX 3070): `--gpu` en la línea de comandos o RENDER_GPU=1.
+// Sin él se usa SwiftShader (CPU), que funciona en cualquier máquina pero es mucho más lento.
+// RENDER_ANGLE fuerza el backend de ANGLE (d3d11, vulkan, gl, metal…); por defecto, el de la plataforma.
+export const GPU = process.argv.includes('--gpu') || process.env.RENDER_GPU === '1';
+
 export async function launch() {
   let pw;
   try {
@@ -32,8 +37,24 @@ export async function launch() {
     const globalRoot = path.join(path.dirname(process.execPath), '..', 'lib', 'node_modules', 'playwright');
     pw = req(globalRoot);
   }
-  return pw.chromium.launch({
-    args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--disable-gpu-sandbox'],
+  if (!GPU) {
+    return pw.chromium.launch({
+      args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--disable-gpu-sandbox'],
+    });
+  }
+  const args = ['--ignore-gpu-blocklist', '--enable-gpu', '--enable-gpu-rasterization', '--disable-gpu-sandbox', '--force_high_performance_gpu'];
+  if (process.env.RENDER_ANGLE) args.push('--use-gl=angle', `--use-angle=${process.env.RENDER_ANGLE}`);
+  // el headless nuevo (channel "chromium") usa la GPU; el headless-shell por defecto no
+  return pw.chromium.launch({ channel: 'chromium', args });
+}
+
+// Nombre de la GPU con la que Chromium renderiza WebGL (para confirmar que no ha caído a SwiftShader).
+export async function gpuName(page) {
+  return page.evaluate(() => {
+    const gl = document.createElement('canvas').getContext('webgl2');
+    if (!gl) return 'sin WebGL2';
+    const ext = gl.getExtension('WEBGL_debug_renderer_info');
+    return ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER);
   });
 }
 
@@ -47,5 +68,9 @@ export async function openScene(browser, url, w, h) {
   await page.waitForFunction('window.ready || window.initError', null, { timeout: 120000 });
   const err = await page.evaluate('window.initError');
   if (err) throw new Error(err);
+  const gpu = await gpuName(page);
+  if (!openScene.logged) console.log(`WebGL: ${gpu}`);
+  openScene.logged = true;
+  if (GPU && /swiftshader|llvmpipe|software/i.test(gpu)) throw new Error(`se pidió --gpu pero Chromium usa ${gpu}; prueba RENDER_ANGLE=d3d11 (Windows), vulkan o gl`);
   return page;
 }

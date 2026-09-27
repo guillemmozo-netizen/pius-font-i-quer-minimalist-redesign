@@ -1,5 +1,5 @@
 // Render del vídeo: Chromium headless -> píxeles RGBA por WebSocket -> ffmpeg (intermedio sin pérdida).
-// node render/render.mjs [--fps 60] [--scale 1] [--start 0] [--end 57] [--jobs 2] [--out build/video_rgb.mkv]
+// node render/render.mjs [--gpu] [--fps 60] [--scale 1] [--start 0] [--end 57] [--jobs 2] [--out build/video_rgb.mkv]
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';

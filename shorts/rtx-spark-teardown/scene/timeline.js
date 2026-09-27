@@ -1,6 +1,6 @@
 // Línea de tiempo determinista: dado t (s) coloca piezas, cámara, luces y post-procesado.
 import * as THREE from 'three';
-import { LAYERS, ORDER, GREEN } from './laptop.js';
+import { LAYERS, ORDER, GREEN, TANDEM_Y } from './laptop.js';
 import { clamp01, lerp, smooth, seg, win, easeOutBack, easeInOutCubic, easeOutCubic, easeInCubic, easeOutExpo } from './util.js';
 
 const DEG = Math.PI / 180;
@@ -104,6 +104,38 @@ const FOCUS = [
 ];
 const fw = (t, a, b) => smooth((t - (a - 0.3)) / 0.6) * smooth((b + 0.3 - t) / 0.6);
 
+// Altura de cada capa (índice de ORDER) en el instante t. Garantiza que ninguna capa
+// atraviese a la de encima: la explosión arranca por la tapa, el rebote de cada golpe
+// es hacia arriba y al final se fuerza el orden (y[i] >= y[i-1]).
+export function layerOffsets(t, c, keepOrder = true) {
+  const pre = seg(t, 3.25, 4.0);
+  const preK = easeInCubic(pre);
+  const jitter = 0.004 * Math.sin(t * 95) * pre;
+  const n = ORDER.length;
+  const ys = new Array(n);
+  for (let i = 0; i < n; i++) {
+    const s0 = c.explode + (n - 1 - i) * 0.035;
+    let p = t < c.explode ? 0 : easeOutBack(seg(t, s0, s0 + 1.05), 1.35);
+    // el temblor previo se disuelve a medida que cada capa despega (sin saltos en t = explode)
+    const hold = 1 - clamp01(p);
+    let bounce = 0;
+    if (i > 0 && t > 43.0) {
+      const hit = c.slams[i - 1];
+      p = 1 - easeInCubic(seg(t, hit - 0.42, hit));
+      if (t > hit) bounce = 0.03 * Math.exp(-(t - hit) * 14) * Math.abs(Math.sin((t - hit) * 30));
+    }
+    let extra = 0;
+    if (t < 43.6) for (const F of FOCUS) {
+      const w = fw(t, F.a, F.b);
+      if (w > 0) extra += w * (i > F.f ? F.up : i < F.f ? -F.down : 0);
+    }
+    const shake = t < 43.0 ? (i * 0.018 * preK + jitter) * hold : 0;
+    ys[i] = LAYERS[ORDER[i]].ex * p + extra + bounce + shake;
+  }
+  if (keepOrder) for (let i = 1; i < n; i++) ys[i] = Math.max(ys[i], ys[i - 1]);
+  return ys;
+}
+
 export class Timeline {
   constructor(cues, laptop, cam, post, extras) {
     this.c = cues;
@@ -141,31 +173,14 @@ export class Timeline {
     const S = {}; // estado para el HUD
 
     // ---- explosión / remontaje
-    const slams = c.slams;
-    const pre = seg(t, 3.25, 4.0);
-    const jitter = 0.004 * Math.sin(t * 95) * pre;
+    const ys = layerOffsets(t, c);
     ORDER.forEach((name, i) => {
-      const Ly = LAYERS[name];
-      const s0 = c.explode + i * 0.035;
-      let p = easeOutBack(seg(t, s0, s0 + 1.05), 1.35);
-      let bounce = 0;
-      if (i > 0 && t > 43.0) {
-        const hit = slams[i - 1];
-        p = 1 - easeInCubic(seg(t, hit - 0.42, hit));
-        if (t > hit) bounce = -0.035 * Math.exp(-(t - hit) * 14) * Math.cos((t - hit) * 30);
-      }
-      if (t < c.explode) p = 0;
-      let extra = 0;
       let dimK = 0;
       for (const F of FOCUS) {
         const w = fw(t, F.a, F.b);
-        if (w <= 0) continue;
-        extra += w * (i > F.f ? F.up : i < F.f ? -F.down : 0);
-        if (i !== F.f && !(F.keep && F.keep.includes(i))) dimK += w * 0.62;
+        if (w > 0 && i !== F.f && !(F.keep && F.keep.includes(i))) dimK += w * 0.62;
       }
-      const y = Ly.ex * p + extra * (t < 43.6 ? 1 : 0) + bounce + (i * 0.018 * easeInCubic(pre) + jitter) * (t < c.explode ? 1 : 0);
-      const grp = layers[name].group;
-      grp.position.y = y;
+      layers[name].group.position.y = ys[i];
       layers[name].dim(1 - clamp01(dimK));
     });
 
@@ -188,7 +203,7 @@ export class Timeline {
     if (parts.screenMesh) parts.screenMesh.visible = parts.screen.uniforms.uPower.value > 0.002;
     parts.tandem.mesh.visible = parts.tandem.mat.uniforms.uPower.value > 0.002;
     parts.tandem.mat.uniforms.uTime.value = t;
-    parts.tandem.mesh.position.y = 0.0063 + 0.22 * easeOutCubic(seg(t, 11.5, 12.1)) * win(t, 11.5, 13.0, 0.01, 0.35);
+    parts.tandem.mesh.position.y = TANDEM_Y + 0.22 * easeOutCubic(seg(t, 11.5, 12.1)) * win(t, 11.5, 13.0, 0.01, 0.35);
     S.tandemSplit = win(t, 11.6, 12.9, 0.3, 0.3);
 
     // ---- teclado: barrido de retroiluminación

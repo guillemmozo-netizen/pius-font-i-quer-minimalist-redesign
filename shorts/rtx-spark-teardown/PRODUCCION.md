@@ -25,7 +25,6 @@ Plano macro del canto del portátil cerrado con la cota «14 mm» → la cámara
 | L10 | 30,8 s | Resultado: hasta un petaflop de IA… en un portátil. |
 | L11 | 35,2 s | Con batería para todo el día, según NVIDIA. |
 | L12 | 38,4 s | Aluminio mecanizado. Desde 14 mm, y menos de kilo y medio. |
-| L13 | 43,4 s | Ahora… al revés. |
 | L14 | 49,6 s | Llega este otoño. |
 | L15 | 52,3 s | ¿Te pasarías a Arm por esto? |
 
@@ -49,7 +48,7 @@ Fuente de verdad del guion y de los huecos de tiempo: `tts/lines.json`.
 | 35,2–38,2 s | Batería todo el día | Las 4 celdas se cargan en verde | Tarjeta + icono de batería llenándose | Blips ascendentes |
 | 38,4–42,8 s | Aluminio, 14 mm, <1,5 kg | Contrapicado del chasis con barrido de luz; puertos brillando | «ALUMINIO» + «DESDE 14 mm» + «<1,5 kg (3 lb)» | Shimmer metálico |
 | 42,8–43,6 s | — | Pull-back total | — | Parón (tape stop) |
-| 43,4–47,4 s | «Ahora… al revés.» | Remontaje con órbita de 360°: cada capa encaja en un pulso | Contador 1/6…6/6 | 6 golpes metálicos, redoble acelerando, riser |
+| 43,4–47,4 s | — | Remontaje con órbita de 360°: cada capa encaja en un pulso | Contador 1/6…6/6 | 6 golpes metálicos, redoble acelerando, riser |
 | 47,4–48,6 s | — | La tapa se abre, se enciende la pantalla | — | Clic de bisagra |
 | 48,6–52,3 s | «Llega este otoño.» | Plano héroe, teclado iluminado | Título + píldora «OTOÑO 2026» | Segunda caída |
 | 52,3–55 s | «¿Te pasarías a Arm por esto?» | Órbita lenta del héroe | Pregunta grande en verde | Impacto |
