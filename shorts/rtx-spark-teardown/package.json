@@ -1,0 +1,21 @@
+{
+  "name": "rtx-spark-teardown-short",
+  "private": true,
+  "type": "module",
+  "description": "Short vertical 1080x1920@60: desmontaje 3D del NVIDIA RTX Spark (N1X), estilo vídeo de producto ASUS/ROG (Three.js + Chromium headless + ffmpeg)",
+  "scripts": {
+    "audio": "python3 audio/build_audio.py",
+    "render": "node render/render.mjs",
+    "preview": "node render/serve.mjs"
+  },
+  "dependencies": {
+    "@fontsource/rajdhani": "^5.2.0",
+    "@fontsource/saira": "^5.2.0",
+    "@fontsource/saira-condensed": "^5.2.0",
+    "three": "^0.180.0",
+    "ws": "^8.22.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.1"
+  }
+}

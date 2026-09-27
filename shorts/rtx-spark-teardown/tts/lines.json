@@ -1,0 +1,108 @@
+{
+  "bpm": 120,
+  "duration": 57.0,
+  "voice": {
+    "language": "Spanish",
+    "instruct": "Voz masculina joven de narrador de tráileres tecnológicos, español de España. Tono grave, seguro y cercano, energía contenida que sube en las cifras clave, ritmo ágil y dicción muy clara. Pausas cortas y dramáticas antes de los números."
+  },
+  "lines": [
+    {
+      "id": "L01",
+      "start": 0.2,
+      "end": 1.8,
+      "caption": "14 milímetros.",
+      "tts": "Catorce milímetros."
+    },
+    {
+      "id": "L02",
+      "start": 2.0,
+      "end": 3.0,
+      "caption": "Y dentro…",
+      "tts": "Y dentro..."
+    },
+    {
+      "id": "L03",
+      "start": 4.1,
+      "end": 7.3,
+      "caption": "…los núcleos CUDA de una RTX 5070.",
+      "tts": "los núcleos CUDA de una R T X cincuenta setenta."
+    },
+    {
+      "id": "L04",
+      "start": 7.5,
+      "end": 10.3,
+      "caption": "NVIDIA RTX Spark. Chip N1X.",
+      "tts": "NVIDIA R T X Spark. Chip N uno X."
+    },
+    {
+      "id": "L05",
+      "start": 10.5,
+      "end": 13.3,
+      "caption": "Arriba: pantalla OLED tándem con G-SYNC.",
+      "tts": "Arriba: pantalla OLED tándem, con G-SYNC."
+    },
+    {
+      "id": "L06",
+      "start": 13.5,
+      "end": 16.3,
+      "caption": "Bajo teclado y ventiladores… un solo chip.",
+      "tts": "Bajo el teclado y los ventiladores... un solo chip."
+    },
+    {
+      "id": "L07",
+      "start": 16.5,
+      "end": 20.6,
+      "caption": "GPU Blackwell: 6.144 núcleos CUDA.",
+      "tts": "Una GPU Blackwell, con seis mil ciento cuarenta y cuatro núcleos CUDA."
+    },
+    {
+      "id": "L08",
+      "start": 20.8,
+      "end": 25.0,
+      "caption": "Unida por NVLink-C2C a una CPU Grace de 20 núcleos.",
+      "tts": "Unida por NVLink C dos C, a una CPU Grace de veinte núcleos."
+    },
+    {
+      "id": "L09",
+      "start": 25.2,
+      "end": 30.6,
+      "caption": "Y hasta 128 GB de memoria unificada: CPU y GPU comparten la misma.",
+      "tts": "Y hasta ciento veintiocho gigas de memoria unificada: la CPU y la GPU comparten la misma."
+    },
+    {
+      "id": "L10",
+      "start": 30.8,
+      "end": 35.0,
+      "caption": "Resultado: hasta 1 petaflop de IA… en un portátil.",
+      "tts": "Resultado: hasta un petaflop de IA... en un portátil."
+    },
+    {
+      "id": "L11",
+      "start": 35.2,
+      "end": 38.2,
+      "caption": "Batería para todo el día, según NVIDIA.",
+      "tts": "Con batería para todo el día, según NVIDIA."
+    },
+    {
+      "id": "L12",
+      "start": 38.4,
+      "end": 42.8,
+      "caption": "Aluminio mecanizado. Desde 14 mm y menos de kilo y medio.",
+      "tts": "Aluminio mecanizado. Desde catorce milímetros, y menos de kilo y medio."
+    },
+    {
+      "id": "L14",
+      "start": 49.6,
+      "end": 51.9,
+      "caption": "Llega este otoño.",
+      "tts": "Llega este otoño."
+    },
+    {
+      "id": "L15",
+      "start": 52.3,
+      "end": 55.0,
+      "caption": "¿Te pasarías a Arm por esto?",
+      "tts": "¿Te pasarías a Arm por esto?"
+    }
+  ]
+}
