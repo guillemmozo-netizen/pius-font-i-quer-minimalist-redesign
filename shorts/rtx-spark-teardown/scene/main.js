@@ -247,8 +247,10 @@ async function init() {
   const laptop = buildLaptop();
   scene.add(laptop.root);
   laptop.root.traverse((o) => {
-    if (o.isMesh && !(o.material && (o.material.isMeshBasicMaterial || o.material.isShaderMaterial))) {
-      o.castShadow = SHADOWS;
+    const m0 = Array.isArray(o.material) ? o.material[0] : o.material;
+    if (o.isMesh && !(m0 && (m0.isMeshBasicMaterial || m0.isShaderMaterial))) {
+      // las piezas diminutas instanciadas no proyectan sombra (coste), pero sí la reciben
+      o.castShadow = SHADOWS && !o.userData.noShadow;
       o.receiveShadow = SHADOWS;
     }
   });
@@ -317,6 +319,18 @@ async function init() {
     return true;
   };
   window.duration = cues.duration;
+  window.stats = () => {
+    let v = 0;
+    let t = 0;
+    laptop.root.traverse((o) => {
+      if (!o.isMesh || !o.geometry) return;
+      const n = o.isInstancedMesh ? o.count : 1;
+      const g = o.geometry;
+      v += g.attributes.position.count * n;
+      t += ((g.index ? g.index.count : g.attributes.position.count) / 3) * n;
+    });
+    return { vertices: v, triangles: Math.round(t) };
+  };
 
   if (Q.get('t')) renderAt(+Q.get('t'));
   window.ready = true;

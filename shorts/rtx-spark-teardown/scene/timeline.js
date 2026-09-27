@@ -184,6 +184,9 @@ export class Timeline {
     parts.screen.uniforms.uPower.value = scrOn * scrFlick;
     parts.screen.uniforms.uTime.value = t;
     parts.tandem.mat.uniforms.uPower.value = win(t, 11.4, 13.1, 0.3, 0.3) * 0.9;
+    // con la pantalla apagada se ve el cristal real (reflejos) en vez del plano emisivo
+    if (parts.screenMesh) parts.screenMesh.visible = parts.screen.uniforms.uPower.value > 0.002;
+    parts.tandem.mesh.visible = parts.tandem.mat.uniforms.uPower.value > 0.002;
     parts.tandem.mat.uniforms.uTime.value = t;
     parts.tandem.mesh.position.y = 0.0063 + 0.22 * easeOutCubic(seg(t, 11.5, 12.1)) * win(t, 11.5, 13.0, 0.01, 0.35);
     S.tandemSplit = win(t, 11.6, 12.9, 0.3, 0.3);
@@ -201,6 +204,14 @@ export class Timeline {
       kb.glow.setColorAt(i, this.keyColor);
     });
     kb.glow.instanceColor.needsUpdate = true;
+    // las leyendas brillan con la misma retroiluminación
+    if (kb.legend) {
+      kb.list.forEach((k, i) => {
+        kb.glow.getColorAt(i, this.keyColor);
+        kb.legend.setColorAt(i, this.keyColor);
+      });
+      kb.legend.instanceColor.needsUpdate = true;
+    }
 
     // ---- refrigeración
     parts.heat.uniforms.uHeat.value = win(t, 14.6, 16.0, 0.4, 0.5) + 0.55 * win(t, 31.0, 35.0, 0.5, 0.5);
@@ -287,8 +298,8 @@ export class Timeline {
       this.x.sweepLight.intensity = 25 * win(t, 0.1, 2.6, 0.4, 0.5);
       this.x.sweepLight.position.set(lerp(-2.6, 1.2, easeInOutCubic(hs)), 0.35, 1.9);
     } else {
-      this.x.sweepLight.intensity = 30 * win(t, 38.6, 41.2, 0.3, 0.4);
-      this.x.sweepLight.position.set(lerp(-3.4, 2.4, easeInOutCubic(sw)), 0.45, 2.1);
+      this.x.sweepLight.intensity = 9 * win(t, 38.6, 41.2, 0.3, 0.4);
+      this.x.sweepLight.position.set(lerp(-3.4, 2.4, easeInOutCubic(sw)), 0.6, 2.6);
     }
 
     // ---- juntas brillando antes de abrir
